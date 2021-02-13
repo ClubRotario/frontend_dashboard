@@ -1,0 +1,23 @@
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+
+<div class="main-container">
+    <div class="xs-pd-20-10 pd-ltr-20">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="title">
+                        <h2 class="display-4">{{ title }}</h2>
+                    </div>
+                    <div class="description">
+                        <p>{{ description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="title pb-20">
+            <h2 class="h3 mb-0">{{ title }}</h2>
+        </div> -->
+        <router-outlet></router-outlet>
+    </div>
+</div>
