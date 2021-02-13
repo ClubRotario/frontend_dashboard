@@ -20,7 +20,13 @@ export class SidebarService {
       path: '/dashboard/users',
       icon: 'dw-user',
       name: 'Usuarios'
+    },
+    {
+      path: '/dashboard/profile',
+      icon: 'dw-user1',
+      name: 'Mi Perfil'
     }
+
   ]
   constructor() { }
 }

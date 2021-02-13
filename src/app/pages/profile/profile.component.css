@@ -1,0 +1,25 @@
+p{
+    margin-bottom: 0px; 
+}
+
+.card-header{
+    background-color: #fff;
+    border-bottom: 0.5px solid rgba(0,0,0,.25);
+    padding: 20px;
+}
+
+.form-content{
+    padding: 20px 75px;
+}
+
+@media screen and (max-width: 576px){
+    .form-content{
+        padding: 10px 25px;
+    }
+}
+
+textarea{
+    min-height: 100px;
+    max-height: 100px;
+    height: 100px;
+}

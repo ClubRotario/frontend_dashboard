@@ -1,1 +1,91 @@
-<p>profile works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-30">
+            <div class="pd-20 card-box height-100-p">
+                <h5 class="text-center h5 mb-0">{{ userDetails.name }} {{ userDetails.lastName }}</h5>
+                <p class="text-muted">Rol: </p>
+                <span class="d-block badge badge-pill badge-primary my-2">{{ userDetails.role }}</span>
+                <div class="profile-info">
+                    <h5 class="mb-20 h5 text-blue">Información de la Cuenta</h5>
+                    <ul>
+                        <li>
+                            <span>ID: </span>
+                            {{ userDetails.userId }}
+                        </li>
+                        <li>
+                            <span>Correo Eléctronico: </span>
+                            {{ userDetails.email }}
+                        </li>
+                        <li>
+                            <span>Celular: </span>
+                            {{ userDetails.phone }}
+                        </li>
+                        <li>
+                            <span>País:</span>
+                            {{ userDetails.country }}
+                        </li>
+                        <li>
+                            <span>Dirección:</span>
+                            {{ userDetails.address }}
+                        </li>
+                    </ul>
+                </div>
+                <button class="btn btn-warning btn-block mt-4">Cambiar mi Contraseña <i class="icon-copy dw dw-password ml-2"></i></button>
+            </div>
+        </div>
+    
+        <!-- Parte derecha del panel  -->
+        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 mb-30">
+            <div class="card-box height-100-p overflow-hidden">
+                <div class="card-header">
+                    <p class="text-primary">Ajustes de la cuenta</p>
+                </div>
+                <div class="card-body form-content">
+                    <form>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <label for="name">Nombre: </label>
+                                <input class="form-control" type="text" id="name" [value]="userDetails.name">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <label for="lastName">Apellidos: </label>
+                                <input class="form-control" type="text" id="lastName" [value]="userDetails.lastName">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <label for="email">Correo: </label>
+                                <input class="form-control" type="text" id="email" [value]="userDetails.email">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <label for="phone">Celular: </label>
+                                <input class="form-control" type="text" id="phone" [value]="userDetails.phone">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <label for="country">País: </label>
+                                <input class="form-control" type="text" id="country" [value]="userDetails.country">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <label for="address">Dirección: </label>
+                                <textarea class="form-control" type="text" id="address" [value]="userDetails.address"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 text-right">
+                                <button class="btn btn-primary" value="50" type="submit">Guardar <i class="icon-copy dw dw-diskette1 ml-2"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

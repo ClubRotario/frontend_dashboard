@@ -11,6 +11,7 @@ export class PagesComponent implements OnInit {
 
   title: string;
   description: string;
+  image: string;
 
 
   constructor(private router: Router) {
@@ -19,6 +20,10 @@ export class PagesComponent implements OnInit {
 
   ngOnInit(): void {
     
+  }
+  
+  get imagePath(){
+    return `assets/images/${this.image || 'team.svg'}`;
   }
 
   //Funcion para obtener la data que mandamos por las rutas
@@ -29,9 +34,10 @@ export class PagesComponent implements OnInit {
       filter( (event: ActivationEnd) => event.snapshot.firstChild === null  ),
       map( (event: ActivationEnd) => event.snapshot.data )
     ).
-    subscribe( ({ title, description }) =>{
+    subscribe( ({ title, description, image }) =>{
       this.title = title;
       this.description = description;
+      this.image = image;
       document.title = `Routary | ${title}`;
     });
   }
