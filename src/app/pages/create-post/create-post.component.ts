@@ -7,9 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreatePostComponent implements OnInit {
 
+  content: string = '';
+
+  contentHTML=`<p>Hola Mundo!</p>`
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  getContent( event ){
+    this.content = event;
+  }
+
+  preview(){
+    document.querySelector('#content').innerHTML = this.content;
   }
 
 }

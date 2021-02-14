@@ -1,1 +1,13 @@
-<p>create-post works!</p>
+<button class="btn btn-primary my-2" (click)="preview()">Vista Previa</button>
+<app-editor (content)="getContent($event)" [data]="contentHTML"></app-editor>
+
+<div>
+    <p>Desde el padre</p>
+    <div class="container">
+        <div class="row">
+            <div class="col-12" id="content">
+
+            </div>
+        </div>
+    </div>
+</div>
