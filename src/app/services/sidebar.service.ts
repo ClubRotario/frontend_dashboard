@@ -25,6 +25,11 @@ export class SidebarService {
       path: '/dashboard/profile',
       icon: 'dw-user1',
       name: 'Mi Perfil'
+    },
+    {
+      path: '/dashboard/categories',
+      icon: 'dw-menu-2',
+      name: 'Categorias'
     }
 
   ]

@@ -1,8 +1,8 @@
-<div class="container">
+<div class="container" *ngIf="userDetails">
     <div class="row">
         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-30">
-            <div class="pd-20 card-box height-100-p">
-                <h5 class="text-center h5 mb-0">{{ userDetails.name }} {{ userDetails.lastName }}</h5>
+            <div class="pd-20 card-box">
+                <h5 class="text-center h5 mb-0">{{ userDetails.name }} {{ userDetails.last_name }}</h5>
                 <p class="text-muted">Rol: </p>
                 <span class="d-block badge badge-pill badge-primary my-2">{{ userDetails.role }}</span>
                 <div class="profile-info">
@@ -21,10 +21,6 @@
                             {{ userDetails.phone }}
                         </li>
                         <li>
-                            <span>País:</span>
-                            {{ userDetails.country }}
-                        </li>
-                        <li>
                             <span>Dirección:</span>
                             {{ userDetails.address }}
                         </li>
@@ -41,41 +37,35 @@
                     <p class="text-primary">Ajustes de la cuenta</p>
                 </div>
                 <div class="card-body form-content">
-                    <form>
+                    <form [formGroup]="formGroup">
                         <div class="form-group row">
                             <div class="col-sm-12">
                                 <label for="name">Nombre: </label>
-                                <input class="form-control" type="text" id="name" [value]="userDetails.name">
+                                <input class="form-control" type="text" id="name" [formControlName]="'name'">
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12">
                                 <label for="lastName">Apellidos: </label>
-                                <input class="form-control" type="text" id="lastName" [value]="userDetails.lastName">
+                                <input class="form-control" type="text" id="lastName" [formControlName]="'last_name'" >
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12">
                                 <label for="email">Correo: </label>
-                                <input class="form-control" type="text" id="email" [value]="userDetails.email">
+                                <input class="form-control" type="text" id="email" [formControlName]="'email'" >
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12">
                                 <label for="phone">Celular: </label>
-                                <input class="form-control" type="text" id="phone" [value]="userDetails.phone">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-12">
-                                <label for="country">País: </label>
-                                <input class="form-control" type="text" id="country" [value]="userDetails.country">
+                                <input class="form-control" type="text" id="phone" [formControlName]="'phone'" >
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12">
                                 <label for="address">Dirección: </label>
-                                <textarea class="form-control" type="text" id="address" [value]="userDetails.address"></textarea>
+                                <textarea class="form-control" type="text" id="address" [formControlName]="'address'" ></textarea>
                             </div>
                         </div>
                         <div class="form-group row">

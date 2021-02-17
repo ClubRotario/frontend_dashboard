@@ -1,9 +1,10 @@
+
 <div class="pd-20 bg-white border-radius-4 box-shadow mb-30">
-    <!-- <div class="row">
+    <div class="row" *ngIf="posts?.length === 0">
         <div class="col-12">
-            <h4 class="display-4 text-center">Posts Creados</h4>
+            <app-alert text="No hay ningun post creado para mostrar" type="info"></app-alert>
         </div>
-    </div> -->
+    </div>
     <div class="row">
         <div class="col-lg-3 col-md-6 col-sm-12 mb-30 mt-4 animate__animated animate__fadeIn" *ngFor="let post of posts">
             <div class="da-card">
@@ -12,7 +13,7 @@
                     <div class="da-overlay da-slide-left">
                         <div class="da-social">
                             <ul class="clearfix">
-                                <li><a href="#"><i class="icon-copy dw dw-edit"></i></a></li>
+                                <li><a [routerLink]="getEditPostUrl( post.post_id )"><i class="icon-copy dw dw-edit"></i></a></li>
                                 <li><a href="#"><i class="icon-copy dw dw-delete-3"></i></a></li>
                             </ul>
                         </div>
@@ -20,7 +21,7 @@
                 </div>
                 <div class="da-card-content">
                     <h5 class="h5 mb-10 text-center">{{ post.title }}</h5>
-                    <p class="mb-0 text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium nesciunt quibusdam maxime deleniti, tempora iste in consequuntur totam culpa accusamus?</p>
+                    <p class="mb-0 text-center">{{ post.description }}</p>
                 </div>
             </div>
         </div>

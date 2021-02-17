@@ -12,6 +12,7 @@ export interface PostInterface{
   published: boolean,
   created_at: Date,
   published_at: Date,
+  description: string
 }
 
 @Injectable({
@@ -38,6 +39,10 @@ export class PostService {
 
   getAllPosts(page = 1){
     return this.http.get(`${Globals.URL}/api/posts/${page}`);
+  }
+
+  getPostById( post_id: number ){
+    return this.http.get(`${Globals.URL}/api/posts/one/${post_id}`);
   }
 
 }

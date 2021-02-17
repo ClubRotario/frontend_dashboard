@@ -1,13 +1,15 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { Globals } from './globals';
 
 export interface UserInterface {
   userId: number,
   name: string,
-  lastName: string,
+  last_name: string,
   email: string,
   role: string,
   phone: string,
-  country: string,
   address: string
 }
 
@@ -16,16 +18,37 @@ export interface UserInterface {
 })
 export class AuthService {
 
-  user: UserInterface = {
-    userId: 1,
-    name: 'Angel Jose',
-    lastName: 'Castillo Portillo',
-    email: 'porillocastilloa@gmail.com',
-    role: 'Administrador',
-    phone: '50496556526',
-    country: 'Honduras',
-    address: 'Barrio san antonio, La paz, honduras'
+  user: UserInterface;
+
+  _user = new BehaviorSubject<UserInterface>({ name: '', last_name: '', email: '', phone: '', userId: 0, address: '', role: '' });
+
+  constructor( private http: HttpClient ) { }
+
+  login( user ){
+    return this.http.post(`${Globals.URL}/api/auth/login`, user);
   }
 
-  constructor() { }
+  getUserDetails(){
+      const headers = new HttpHeaders({
+        token: this.getToken()
+      })
+      this.http.get(`${Globals.URL}/api/auth/details`, { headers }).subscribe( (res: any) => {
+        this.user = res.userDetails;
+        this._user.next( this.user );
+      }, (error: any) => {
+        console.log(error);
+      })
+  }
+
+  saveToken( token: string ){
+    localStorage.setItem('token', token);
+  }
+
+  getToken(){
+    return (localStorage.getItem('token')? localStorage.getItem('token'): '' );
+  }
+
+  deleteToken(){
+    localStorage.removeItem('token');
+  }
 }

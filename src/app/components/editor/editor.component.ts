@@ -78,7 +78,7 @@ export class EditorComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    if(this.data.length > 0){
+    if(this.data){
       this.content.emit( this.data );
     }
   }

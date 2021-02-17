@@ -27,8 +27,11 @@ export class PostsComponent implements OnInit {
     this.postService.getAllPosts( this.postId ).subscribe( (res: any) =>{
       this.posts = res.posts;
       this.pagination = res.pagination;
-      console.log(res.pagination);
     });
+  }
+
+  getEditPostUrl( id: any ){
+    return `/dashboard/edit-post/${id}`
   }
 
 }

@@ -11,16 +11,22 @@ import { PostsComponent } from './posts/posts.component';
 import { UsersComponent } from './users/users.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { HttpClientModule } from '@angular/common/http';
+import { EditPostComponent } from './edit-post/edit-post.component';
+import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CategoriesComponent } from './categories/categories.component';
 
 
 @NgModule({
-  declarations: [PagesComponent, DashboardComponent, ProfileComponent, PostsComponent, UsersComponent, CreatePostComponent],
+  declarations: [PagesComponent, DashboardComponent, ProfileComponent, PostsComponent, UsersComponent, CreatePostComponent, EditPostComponent, CategoriesComponent],
   imports: [
     CommonModule,
     PagesRoutingModule,
     SharedModule,
     ComponentsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule,
+    ReactiveFormsModule
   ]
 })
 export class PagesModule { }

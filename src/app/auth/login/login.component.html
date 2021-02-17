@@ -9,15 +9,15 @@
                     <div class="login-title">
                         <h2 class="text-center text-warning">Inicia Sesión</h2>
                     </div>
-                    <form>
+                    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" >
                         <div class="input-group custom">
-                            <input type="text" class="form-control form-control-lg" placeholder="Correo Electronico">
+                            <input type="text" class="form-control form-control-lg" placeholder="Correo Electronico" [formControlName]="'email'" >
                             <div class="input-group-append custom">
                                 <span class="input-group-text"><i class="icon-copy dw dw-user1"></i></span>
                             </div>
                         </div>
                         <div class="input-group custom">
-                            <input type="password" class="form-control form-control-lg" placeholder="Contraseña">
+                            <input type="password" class="form-control form-control-lg" placeholder="Contraseña" [formControlName]="'password'" >
                             <div class="input-group-append custom">
                                 <span class="input-group-text"><i class="dw dw-padlock1"></i></span>
                             </div>
@@ -40,7 +40,7 @@
                                         use code for form submit
                                         <input class="btn btn-primary btn-lg btn-block" type="submit" value="Sign In">
                                     -->
-                                    <a class="btn btn-warning btn-lg btn-block" href="index.html">Iniciar Sesión</a>
+                                    <input type="submit" class="btn btn-warning btn-lg btn-block" value="Iniciar Sesión" [disabled]="formGroup.invalid" >
                                 </div>
                             </div>
                         </div>
