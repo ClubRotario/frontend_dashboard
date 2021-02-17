@@ -10,6 +10,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { PostsComponent } from './posts/posts.component';
 import { UsersComponent } from './users/users.component';
 import { CreatePostComponent } from './create-post/create-post.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { CreatePostComponent } from './create-post/create-post.component';
     CommonModule,
     PagesRoutingModule,
     SharedModule,
-    ComponentsModule
+    ComponentsModule,
+    HttpClientModule
   ]
 })
 export class PagesModule { }

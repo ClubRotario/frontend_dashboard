@@ -12,7 +12,7 @@ export class SidebarService {
       name: 'Dashboard'
     },
     {
-      path: '/dashboard/posts',
+      path: '/dashboard/posts/1',
       icon: 'dw-file',
       name: 'Posts'
     },
