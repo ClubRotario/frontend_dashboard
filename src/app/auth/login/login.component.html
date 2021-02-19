@@ -10,14 +10,17 @@
                         <h2 class="text-center text-warning">Inicia Sesión</h2>
                     </div>
                     <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" >
+                        <small class="text-danger d-block" *ngIf="isEmptyEmail">El correo electrónico es obligatorio.</small>
+                        <small class="text-danger d-block" *ngIf="isValidEmail">El correo electrónico no es válido.</small>
                         <div class="input-group custom">
-                            <input type="text" class="form-control form-control-lg" placeholder="Correo Electronico" [formControlName]="'email'" >
+                            <input type="text" class="form-control form-control-lg" [class.border-danger]="hasErrorsEmail" placeholder="Correo Electronico" [formControlName]="'email'" >
                             <div class="input-group-append custom">
                                 <span class="input-group-text"><i class="icon-copy dw dw-user1"></i></span>
                             </div>
                         </div>
+                        <small class="text-danger d-block" *ngIf="isValidPassword">La contraseña es necesaria para iniciar sesión.</small>
                         <div class="input-group custom">
-                            <input type="password" class="form-control form-control-lg" placeholder="Contraseña" [formControlName]="'password'" >
+                            <input type="password" class="form-control form-control-lg" [class.border-danger]="hasErrorsPassword" placeholder="Contraseña" [formControlName]="'password'" >
                             <div class="input-group-append custom">
                                 <span class="input-group-text"><i class="dw dw-padlock1"></i></span>
                             </div>
@@ -25,8 +28,8 @@
                         <div class="row pb-30">
                             <div class="col-12">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                    <label class="custom-control-label" for="customCheck1">Recordarme</label>
+                                    <input type="checkbox" class="custom-control-input" id="remember" [formControlName]="'remember'">
+                                    <label class="custom-control-label" for="remember">Recordarme</label>
                                 </div>
                             </div>
                             <div class="col-12">

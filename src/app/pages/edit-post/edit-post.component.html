@@ -5,7 +5,7 @@
                 <div class="form-group row">
                     <div class="col-sm-12">
                         <label for="title">Titulo: </label>
-                        <input class="form-control" type="text" id="title" [value]="postDetails?.post.title">
+                        <input class="form-control" type="text" id="title" [value]="postDetails?.post.title || ''">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -23,6 +23,7 @@
             <div class="col-12">
                 <div class="card border-0 p-4">
                     Detalles
+                    <input type="checkbox" class="js-switch" checked />
                 </div>
             </div>
         </div>

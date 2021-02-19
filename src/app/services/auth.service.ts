@@ -1,7 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Route } from '@angular/compiler/src/core';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Globals } from './globals';
+import { Router } from '@angular/router';
 
 export interface UserInterface {
   userId: number,
@@ -22,7 +24,7 @@ export class AuthService {
 
   _user = new BehaviorSubject<UserInterface>({ name: '', last_name: '', email: '', phone: '', userId: 0, address: '', role: '' });
 
-  constructor( private http: HttpClient ) { }
+  constructor( private http: HttpClient, private router: Router ) { }
 
   login( user ){
     return this.http.post(`${Globals.URL}/api/auth/login`, user);
@@ -40,6 +42,11 @@ export class AuthService {
       })
   }
 
+  logOut(){
+    this.deleteToken();
+    this.router.navigateByUrl('/login');
+  }
+
   saveToken( token: string ){
     localStorage.setItem('token', token);
   }
@@ -50,5 +57,19 @@ export class AuthService {
 
   deleteToken(){
     localStorage.removeItem('token');
+  }
+
+  setEmail( email: string ){
+    localStorage.setItem('email', email);
+  }
+
+  getEmail(){
+    if( localStorage.getItem('email') ){
+      return localStorage.getItem('email');
+    }
+  }
+
+  removeEmail(){
+    localStorage.removeItem('email');
   }
 }

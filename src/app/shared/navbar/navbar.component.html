@@ -10,7 +10,7 @@
         </a>
         <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
           <a class="dropdown-item" routerLink='/dashboard/profile'><i class="dw dw-user1"></i> Perfil</a>
-          <a class="dropdown-item" routerLink="/login"><i class="dw dw-logout"></i> Cerrar Sesiónt</a>
+          <a class="dropdown-item" (click)="authService.logOut()"><i class="dw dw-logout"></i> Cerrar Sesión</a>
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PostService, PostInterface } from '../../services/post.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -54,6 +54,11 @@ export class EditPostComponent implements OnInit {
       title: [''],
       description: ['']
     });
+
+    //Switchery call
+    document.querySelectorAll('.js-switch').forEach( (element) => {
+      // let switchery = new Switchery(element);
+    })
   }
 
   onSubmit(){

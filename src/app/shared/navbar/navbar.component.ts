@@ -15,7 +15,7 @@ export class NavbarComponent implements OnInit {
 
   userSub: Subscription;
 
-  constructor(private authService: AuthService) { }
+  constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
     this.getUserDetails();

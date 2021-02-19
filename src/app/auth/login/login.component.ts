@@ -32,6 +32,11 @@ export class LoginComponent implements OnInit {
   //Enviando el formulario de login al servicio
   onSubmit(){
     if(this.formGroup.valid){
+      if(this.formGroup.get('remember').value){
+        this.authService.setEmail( this.formGroup.get('email').value );
+      }else{
+        this.authService.removeEmail();
+      }
       const user = {
         email: this.formGroup.get('email').value,
         password: this.formGroup.get('password').value
@@ -55,9 +60,32 @@ export class LoginComponent implements OnInit {
 
   initForm(){
     this.formGroup = this.formBuilder.group({
-      email: ['portillocastilloa@gmail.com', Validators.required],
-      password: ['12345678', Validators.required]
+      email: [this.authService?.getEmail() || '', [Validators.required , Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]],
+      password: ['', Validators.required],
+      remember: [this.authService?.getEmail() || false]
     });
+  };
+
+
+  //Getters para obtener validaciones
+
+  get hasErrorsEmail(){
+    return this.formGroup.get('email').touched && this.formGroup.get('email').errors
+  }
+
+  get isEmptyEmail(){
+    return this.formGroup.get('email').touched && this.formGroup.get('email').errors && this.formGroup.get('email').errors.required;
+  }
+
+  get isValidEmail(){
+    return this.formGroup.get('email').touched && this.formGroup.get('email').errors && this.formGroup.get('email').errors.pattern;
+  }
+
+  get isValidPassword(){
+    return this.formGroup.get('password').touched && this.formGroup.get('password').errors && this.formGroup.get('password').errors.required;
+  }
+  get hasErrorsPassword(){
+    return this.formGroup.get('password').touched && this.formGroup.get('password').errors
   }
 
 }
