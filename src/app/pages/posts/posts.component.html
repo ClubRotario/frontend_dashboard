@@ -1,0 +1,34 @@
+
+<div class="pd-20 bg-white border-radius-4 box-shadow mb-30">
+    <div class="row" *ngIf="posts?.length === 0">
+        <div class="col-12">
+            <app-alert text="No hay ningun post creado para mostrar" type="info"></app-alert>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-12 mb-30 mt-4 animate__animated animate__fadeIn" *ngFor="let post of posts">
+            <div class="da-card">
+                <div class="da-card-photo">
+                    <img src="https://images.unsplash.com/photo-1613407793897-36a29386934c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="">
+                    <div class="da-overlay da-slide-left">
+                        <div class="da-social">
+                            <ul class="clearfix">
+                                <li><a [routerLink]="getEditPostUrl( post.post_id )"><i class="icon-copy dw dw-edit"></i></a></li>
+                                <li><a href="#"><i class="icon-copy dw dw-delete-3"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="da-card-content">
+                    <h5 class="h5 mb-10 text-center">{{ post.title }}</h5>
+                    <p class="mb-0 text-center">{{ post.description }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <app-pagination [pages]="pagination" (changePage)="getAllPosts()" ></app-pagination>
+        </div>
+    </div>
+</div>

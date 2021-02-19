@@ -1,0 +1,34 @@
+<div class="left-side-bar">
+  <div class="brand-logo">
+    <a routerLink='/dashboard'>
+      <img src="../../../assets/images/rotary_club-logo-light.png" alt="" class="p-4 mx-auto">
+      <!-- <img src="../../../assets/images/deskapp-logo-white.svg" alt="" class="light-logo"> -->
+    </a>
+  </div>
+  <div class="menu-block customscroll mCustomScrollbar _mCS_3"><div id="mCSB_3" class="mCustomScrollBox mCS-dark-2 mCSB_vertical mCSB_inside" tabindex="0" style="max-height: none;"><div id="mCSB_3_container" class="mCSB_container" style="position:relative; top:0; left:0;" dir="ltr">
+    <div class="sidebar-menu icon-style-1 icon-list-style-1">
+      
+      <ul id="accordion-menu" class="pt-4">
+        <li class="p-2 my-2">
+          <a routerLink="/dashboard/create-post" class="btn btn-warning btn-block"><span class="micon dw dw-add-file-1 mr-2"></span><span class="mtext">Crear Post</span></a>
+        </li>
+        <li *ngFor="let item of itemsMenu">
+          <a [routerLink]="item.path" class="dropdown-toggle no-arrow" routerLinkActive [routerLinkActiveOptions]="{ exact: true }">
+            <span class="micon dw" [class]="item.icon"></span><span class="mtext">{{ item.name }}</span>
+          </a>
+        </li>
+      </ul>
+      <!-- <ul id="accordion-menu">
+        <li class="dropdown">
+          <a href="javascript:;" class="dropdown-toggle" data-option="off">
+            <span class="micon dw dw-house-1"></span><span class="mtext">Home</span>
+          </a>
+          <ul class="submenu">
+            <li><a href="index.html">Dashboard style 1</a></li>
+            <li><a href="index2.html">Dashboard style 2</a></li>
+            <li><a href="index3.html">Dashboard style 3</a></li>
+          </ul>
+        </li>
+      </ul> -->
+    </div>
+</div>

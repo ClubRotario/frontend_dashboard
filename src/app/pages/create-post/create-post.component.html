@@ -1,0 +1,12 @@
+<button class="btn btn-primary my-2" (click)="preview()">Vista Previa</button>
+<app-editor (content)="getContent($event)" [data]="contentHTML"></app-editor>
+
+<div>
+    <div class="container p-4 mt-4">
+        <div class="row">
+            <div class="col-12" id="content">
+
+            </div>
+        </div>
+    </div>
+</div>

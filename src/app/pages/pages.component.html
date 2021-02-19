@@ -1,0 +1,33 @@
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+
+<div class="main-container">
+    <div class="xs-pd-20-10 pd-ltr-20">
+        <div class="page-header">
+            <div class="pd-20 height-100-p mb-30">
+				<div class="row align-items-center">
+					<div class="col-md-4 text-center">
+						<img [src]="imagePath">
+					</div>
+					<div class="col-md-8 animate__animated animate__fadeIn">
+						<h4 class="font-20 weight-500 mb-10 text-capitalize">
+							<div class="weight-600 font-30 text-blue title">{{ title }}</div>
+						</h4>
+						<p class="font-18 description">{{ description }}</p>
+					</div>
+				</div>
+			</div>
+            <!-- <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="title">
+                        <h2 class="display-4">{{ title }}</h2>
+                    </div>
+                    <div class="description">
+                        <p>{{ description }}</p>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+        <router-outlet></router-outlet>
+    </div>
+</div>
