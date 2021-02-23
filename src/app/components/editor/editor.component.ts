@@ -1,5 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { HttpHeaders } from '@angular/common/http';
+import { Component, EventEmitter, Input, OnInit, Output, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import * as Editor from '../../../assets/editor/ckeditor.js';
+import { PostService } from '../../services/post.service';
 
 interface EditorInterface {
   data: string
@@ -10,9 +13,11 @@ interface EditorInterface {
   templateUrl: './editor.component.html',
   styleUrls: ['./editor.component.css']
 })
-export class EditorComponent implements OnInit {
+export class EditorComponent implements OnInit, OnDestroy {
 
   Editor = Editor;
+
+  postIdSub: Subscription;
 
   editorConfig = {
     toolbar: {
@@ -63,10 +68,9 @@ export class EditorComponent implements OnInit {
     simpleUpload: {
       uploadUrl: 'http://localhost:3300/api/posts/images/upload',
       withCredentials: false,
-      // headers: {
-      //   'X-CSRF-TOKEN': 'CSFR-Token',
-      //    Authorization: 'Bearer <JSON Web Token>',
-      // }
+      headers: {
+        postId: 0
+      }
   },
   };  
 
@@ -75,12 +79,18 @@ export class EditorComponent implements OnInit {
   @Input() data = '';
 
 
-  constructor() { }
+  constructor( private postService: PostService ) { }
+  ngOnDestroy(): void {
+    this.postIdSub.unsubscribe();
+  }
 
   ngOnInit(): void {
     if(this.data){
       this.content.emit( this.data );
     }
+    this.postIdSub = this.postService._postId.subscribe( (id: any) => {
+      this.editorConfig.simpleUpload.headers.postId = id;
+    });
   }
 
   changeData(){

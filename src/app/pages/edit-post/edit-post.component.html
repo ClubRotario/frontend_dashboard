@@ -1,31 +1,64 @@
 <div class="row">
-    <div class="col-12 col-md-9">
-        <div class="card border-0 p-4">
-            <form [formGroup]="formGroup" (submit)="onSubmit()">
+    <div class="col-12 col-md-7">
+        <div class="card border-0 p-4 h-100">
+            <form [formGroup]="formGroup" (submit)="onSubmit()" *ngIf="postDetails">
                 <div class="form-group row">
                     <div class="col-sm-12">
                         <label for="title">Titulo: </label>
-                        <input class="form-control" type="text" id="title" [value]="postDetails?.post.title || ''">
+                        <input class="form-control" type="text" id="title" [formControlName]="'title'">
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-12">
                         <label for="description">Descripción: </label>
-                        <textarea class="form-control" type="text" id="description">{{ postDetails?.post.description }}</textarea>
+                        <textarea class="form-control" type="text" id="description" [formControlName]="'description'"></textarea>
                     </div>
                 </div>
             </form>
-            <app-editor (content)="postDetails?.post.content" [data]="postDetails?.post.content"></app-editor>
+
         </div>
     </div>
-    <div class="col-12 col-md-3">
+    <div class="col-12 col-md-5">
         <div class="row">
-            <div class="col-12">
-                <div class="card border-0 p-4">
-                    Detalles
-                    <input type="checkbox" class="js-switch" checked />
+            <div class="col-12 col-md-6 my-1">
+                <div class="card border-0 h-100">
+                    <div class="card-header border-0">
+                        <h4>Mostrar este post</h4>
+                    </div>
+                    <div class="card-body p-4 text-center mx-auto">
+                
+                        <label class="switch">
+                            <input type="checkbox" class="success" (change)="publishPost( published )" #published >
+                            <span class="slider round"></span>
+                        </label>
+
+                    </div>
                 </div>
             </div>
+            <div class="col-12 col-md-6 my-1">
+                <div class="card border-0">
+                    <div class="card-header border-0 d-flex justify-content-between align-items-center">
+                        <h4>Agendar</h4>
+                        <label class="switch">
+                            <input type="checkbox" class="warning" (change)="createEntry( entry )" #entry >
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="card-body p-4">
+                        <app-calendar (selectedDate)="setDate($event)" ></app-calendar>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 my-1">
+                <app-category (category_id)="setCategory($event)" [selected]="postDetails?.post.category_id || 0" ></app-category>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card p-4 border-0 mt-4">
+            <app-editor (content)="setPostContent($event)" [data]="postDetails?.post.content"></app-editor>
         </div>
     </div>
 </div>

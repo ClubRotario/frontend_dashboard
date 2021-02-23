@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Globals } from '../services/globals';
 import { AuthService } from './auth.service';
+import { BehaviorSubject } from 'rxjs';
 
 export interface PostInterface{
   post_id: number,
@@ -15,10 +16,18 @@ export interface PostInterface{
   description: string
 }
 
+export interface CategoryInterface{
+  category_id: number,
+  category: string
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
+
+
+  _postId = new BehaviorSubject<string>('1');
 
   constructor( private http: HttpClient, private authService: AuthService ) { }
 
@@ -26,7 +35,6 @@ export class PostService {
     const post = {
       title,
       user_id: this.authService.user.userId
-
     }
     return new Promise( (resolve, reject) => {
       this.http.post(`${Globals.URL}/api/posts`, post).subscribe( (res: any) =>{
@@ -43,6 +51,23 @@ export class PostService {
 
   getPostById( post_id: number ){
     return this.http.get(`${Globals.URL}/api/posts/one/${post_id}`);
+  }
+
+  setPostId( id: string ){
+    this._postId.next( id );
+  }
+
+  updatePost( post: any ){
+    console.log(post);
+    this.http.put(`${Globals.URL}/api/posts`, post ).subscribe( (res: any) => {
+      console.log(res);
+    }, (error: any) => {
+      console.log(error);
+    });
+  }
+
+  getCategories(){
+    return this.http.get(`${Globals.URL}/api/posts/data/categories`);
   }
 
 }

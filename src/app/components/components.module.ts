@@ -6,11 +6,13 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationComponent } from './pagination/pagination.component';
 import { RouterModule } from '@angular/router';
+import { CalendarComponent } from './calendar/calendar.component';
+import { CategoryComponent } from './category/category.component';
 
 
 
 @NgModule({
-  declarations: [AlertComponent, EditorComponent, PaginationComponent],
+  declarations: [AlertComponent, EditorComponent, PaginationComponent, CalendarComponent, CategoryComponent],
   imports: [
     CommonModule,
     CKEditorModule,
@@ -18,6 +20,6 @@ import { RouterModule } from '@angular/router';
     ReactiveFormsModule,
     RouterModule
   ],
-  exports: [ AlertComponent, EditorComponent, PaginationComponent ]
+  exports: [ AlertComponent, EditorComponent, PaginationComponent, CalendarComponent, CategoryComponent ]
 })
 export class ComponentsModule { }
