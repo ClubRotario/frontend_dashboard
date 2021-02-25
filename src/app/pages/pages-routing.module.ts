@@ -8,11 +8,13 @@ import { CreatePostComponent } from './create-post/create-post.component';
 import { UsersComponent } from './users/users.component';
 import { EditPostComponent } from './edit-post/edit-post.component';
 import { CategoriesComponent } from './categories/categories.component';
+import { AuthGuard } from '../guards/auth.guard';
 
 const routes: Routes = [
   {
     path: 'dashboard',
     component: PagesComponent,
+    canActivate:[ AuthGuard ],
     children: [
       { path: '', component: DashboardComponent, data: { title: 'Dashboard', description: 'Aquí podrás ver un resumen en general del sistema, cuantos posts se han creado, cuáles fueron los últimos posts que se crearon así como los usuarios registrados en el sistema.', image: 'dashboard.svg' } },
       { path: 'profile', component: ProfileComponent, data: { title: 'Perfil', description: 'Gestiona tu información personal, cambia tu contraseña para ingresar al sistema si lo consideras necesario.', image: 'profile.svg' } },
@@ -20,7 +22,7 @@ const routes: Routes = [
       { path: 'users', component: UsersComponent, data: { title: 'Usuarios', description: 'Controla los usuarios que pueden acceder al sistema, crea una cuenta de ser necesario o si deseas que un usuario no inicie sesión mas en el sistema puedes eliminarlo.', image: 'users.svg' }},
       { path: 'create-post', component: CreatePostComponent, data: { title: 'Crea un Nuevo Post', description: 'Cuenta una actividad, hazle saber a tus visitantes todo lo que realizas mediante un post, lo que publiques aquí será visible para todas las personas que ingresen al sitio web en el apartado de ‘Blog’.', image: 'post.svg' }},
       { path: 'edit-post/:id', component: EditPostComponent, data: { title: 'Editar Post', description: 'Hazle las modificaciones necesarias al post seleccionado' } },
-      { path: 'categories', component: CategoriesComponent, data: { title: 'Categorias', description: 'Edita, agrega o elimina las categorias existentes para los posts' } }
+      { path: 'categories', component: CategoriesComponent, data: { title: 'Categorías', description: 'Edita, agrega o elimina las categorias existentes para los posts' } }
     ]
   }
 ];

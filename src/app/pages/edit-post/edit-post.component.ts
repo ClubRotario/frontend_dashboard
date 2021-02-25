@@ -33,14 +33,12 @@ export class EditPostComponent implements OnInit {
 
   postId: number;
   postDetails: PostDetailsInterface;
-  
-  formGroup: FormGroup;
 
   calendar: string;
 
   time:any;
 
-  constructor( private postService: PostService, private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder ) { }
+  constructor( private postService: PostService, private activatedRoute: ActivatedRoute ) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( ({ id }) =>{
@@ -54,23 +52,12 @@ export class EditPostComponent implements OnInit {
   getOnePost(){
     this.postService.getPostById( this.postId ).subscribe( (res: any) =>{
       this.postDetails = res;
-      this.formLoad();
     })
   }
 
-  formLoad(){
-    this.formGroup = this.formBuilder.group({
-      title: [this.postDetails?.post.title || '' ],
-      description: [this.postDetails.post.description || '', Validators.required]
-    });
-  }
-
-  onSubmit(){
-
-  }
 
   publishPost( published: any ){
-    if(this.formGroup.invalid){
+    if(!this.postDetails.post.description){
       published.checked = false;
       this.showAlert( 'Error al momento de publicar', 'Por favor complete la descripcion de post para poder publicarlo.', 'error' );
     }else if( !this.postDetails.post.content ){
@@ -79,6 +66,8 @@ export class EditPostComponent implements OnInit {
     }else if(!this.postDetails.post.category_id){
       published.checked = false;
       this.showAlert( 'Error al momento de publicar', 'Selecciona una categoria antes de publicar el post.', 'error' );
+    }else{
+      this.postService.publishPost( this.postDetails.postId, this.postDetails.post.published );
     }
   }
 
@@ -106,6 +95,7 @@ export class EditPostComponent implements OnInit {
   //Colocar el valor proveniente del componente category
   setCategory( event: number ){
     this.postDetails.post.category_id = event;
+    this.autoSave();
   }
 
   autoSave(){
@@ -113,6 +103,15 @@ export class EditPostComponent implements OnInit {
     this.time = setTimeout(() => {
         this.postService.updatePost( this.postDetails );
     }, 5000);
+  }
+
+  onChangeTitle(){
+    if(!this.postDetails.post.title){
+      this.showAlert('Error, a la hora de editar el post', 'Ingresa un titulo para poder continuar', 'error');
+      this.getOnePost();
+    }else{
+      this.autoSave();
+    }
   }
 
 

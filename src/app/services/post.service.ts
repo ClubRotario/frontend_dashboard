@@ -58,7 +58,7 @@ export class PostService {
   }
 
   updatePost( post: any ){
-    console.log(post);
+    post.updated_at = new Date();
     this.http.put(`${Globals.URL}/api/posts`, post ).subscribe( (res: any) => {
       console.log(res);
     }, (error: any) => {
@@ -68,6 +68,14 @@ export class PostService {
 
   getCategories(){
     return this.http.get(`${Globals.URL}/api/posts/data/categories`);
+  }
+
+  publishPost( post_id: number, published: boolean ){
+    return this.http.put(`${Globals.URL}/api/posts/publish`, {post_id, published}).subscribe( (res: any) => {
+      console.log('Published!');
+    }, (error: any) => {
+      console.log(error);
+    });
   }
 
 }

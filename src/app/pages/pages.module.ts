@@ -13,7 +13,7 @@ import { CreatePostComponent } from './create-post/create-post.component';
 import { HttpClientModule } from '@angular/common/http';
 import { EditPostComponent } from './edit-post/edit-post.component';
 import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CategoriesComponent } from './categories/categories.component';
 
 
@@ -26,7 +26,8 @@ import { CategoriesComponent } from './categories/categories.component';
     ComponentsModule,
     HttpClientModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class PagesModule { }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { Globals } from '../../services/globals';
 import { PostService } from '../../services/post.service';
 
 @Component({
@@ -46,9 +45,12 @@ export class CreatePostComponent implements OnInit {
         return this.postService.createPost( title );
       },
       
-    }).then((result) => {
+    }).then((result:any) => {
       if(!result.isConfirmed){
         this.router.navigateByUrl('/dashboard/posts/1')
+      }else{
+        const { insertId } = result.value.post;
+        this.router.navigateByUrl(`/dashboard/edit-post/${insertId}`);
       }
     })
   }

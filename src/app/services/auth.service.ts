@@ -47,8 +47,20 @@ export class AuthService {
     this.router.navigateByUrl('/login');
   }
 
+  passwordRecovery(email: string){
+    return this.http.post(`${Globals.URL}/api/auth/recovery`, { email });
+  }
+
+  codeVerification(code: number, user_id: number){
+    return this.http.post(`${Globals.URL}/api/auth/verify/code`, { code, user_id })
+  }
+
   saveToken( token: string ){
     localStorage.setItem('token', token);
+  }
+
+  updatePassword( password: string, user_id: number ){
+    return this.http.put(`${Globals.URL}/api/auth/password`, { password, user_id });
   }
 
   getToken(){
@@ -71,5 +83,12 @@ export class AuthService {
 
   removeEmail(){
     localStorage.removeItem('email');
+  }
+
+  isLoggedIn(){
+    const headers = new HttpHeaders({
+      token: this.getToken()
+    });
+    return this.http.get(`${Globals.URL}/api/auth/is-logged`, { headers });
   }
 }
