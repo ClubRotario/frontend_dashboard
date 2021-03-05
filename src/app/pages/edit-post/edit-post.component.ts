@@ -4,6 +4,7 @@ import { PostService, PostInterface } from '../../services/post.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import Swal from 'sweetalert2';
+import { Globals } from 'src/app/services/globals';
 
 declare function initFunctions();
 
@@ -19,7 +20,10 @@ interface PostDetailsInterface{
     tag_id: number,
     title: string,
     updated_at: Date,
-    user_id: number
+    user_id: number,
+    profile: string,
+    entry?: boolean,
+    entry_date?: Date
   },
   postId: number
 }
@@ -52,6 +56,12 @@ export class EditPostComponent implements OnInit {
   getOnePost(){
     this.postService.getPostById( this.postId ).subscribe( (res: any) =>{
       this.postDetails = res;
+      if(this.postDetails.post.profile){
+        this.postDetails.post.profile = `${Globals.URL}/profiles/${this.postDetails.post.profile}`;
+      }
+      if(this.postDetails.post.entry){
+        this.calendar = this.postDetails.post.entry_date.toString();
+      }
     })
   }
 
@@ -80,6 +90,19 @@ export class EditPostComponent implements OnInit {
         confirmButtonText: 'Aceptar'
       });
       entry.checked = false;
+    }else{
+      const date = new Date(this.calendar);
+      this.postService.saveAsEntry(date, this.postDetails.postId, entry.checked).then( (res: any) => {
+        this.showAlert('Correcto', 'Agenda modifcada correctamente', 'success');
+        if(!entry.checked){
+          this.calendar = '';
+          this.postDetails.post.entry = false;
+          this.postDetails.post.entry_date = null;
+        }
+      }).catch( (error: any) => {
+        console.log(error);
+        entry.checked = false;
+      });
     }
   }
 
@@ -112,6 +135,24 @@ export class EditPostComponent implements OnInit {
     }else{
       this.autoSave();
     }
+  }
+
+  //Metodo para actualizar la imagen
+  updateProfile( event: any, profile: any ){
+    const file = event.target.files[0];
+    const { type } = file;
+    if(type.substr(0, 5) !== 'image'){
+      this.showAlert( 'Error al momento de subir la imagen', 'La imagen seleccionada no esta admitida, asegurese que sea una imagen y no otro tipo de archivo', 'error' );
+      profile.value = '';
+      return;
+    }else{
+      this.postService.updateProfile( file, this.postDetails.postId ).then( (res: any) => {
+        this.postDetails.post.profile = res.url;
+      }).catch( (error: any) => {
+        console.log(error);
+      })
+    }
+  
   }
 
 

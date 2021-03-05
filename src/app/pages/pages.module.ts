@@ -15,10 +15,12 @@ import { EditPostComponent } from './edit-post/edit-post.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CategoriesComponent } from './categories/categories.component';
+import { NoimagePipe } from './pipes/noimage.pipe';
+
 
 
 @NgModule({
-  declarations: [PagesComponent, DashboardComponent, ProfileComponent, PostsComponent, UsersComponent, CreatePostComponent, EditPostComponent, CategoriesComponent],
+  declarations: [PagesComponent, DashboardComponent, ProfileComponent, PostsComponent, UsersComponent, CreatePostComponent, EditPostComponent, CategoriesComponent, NoimagePipe],
   imports: [
     CommonModule,
     PagesRoutingModule,
@@ -27,7 +29,7 @@ import { CategoriesComponent } from './categories/categories.component';
     HttpClientModule,
     RouterModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
   ]
 })
 export class PagesModule { }

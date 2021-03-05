@@ -22,7 +22,7 @@ const routes: Routes = [
       { path: 'users', component: UsersComponent, data: { title: 'Usuarios', description: 'Controla los usuarios que pueden acceder al sistema, crea una cuenta de ser necesario o si deseas que un usuario no inicie sesión mas en el sistema puedes eliminarlo.', image: 'users.svg' }},
       { path: 'create-post', component: CreatePostComponent, data: { title: 'Crea un Nuevo Post', description: 'Cuenta una actividad, hazle saber a tus visitantes todo lo que realizas mediante un post, lo que publiques aquí será visible para todas las personas que ingresen al sitio web en el apartado de ‘Blog’.', image: 'post.svg' }},
       { path: 'edit-post/:id', component: EditPostComponent, data: { title: 'Editar Post', description: 'Hazle las modificaciones necesarias al post seleccionado' } },
-      { path: 'categories', component: CategoriesComponent, data: { title: 'Categorías', description: 'Edita, agrega o elimina las categorias existentes para los posts' } }
+      { path: 'categories-tags', component: CategoriesComponent, data: { title: 'Categorías y Tags', description: 'Edita, agrega o elimina las categorias y tags existentes para los posts' } }
     ]
   }
 ];

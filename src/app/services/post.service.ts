@@ -13,7 +13,8 @@ export interface PostInterface{
   published: boolean,
   created_at: Date,
   published_at: Date,
-  description: string
+  description: string,
+  profile: string
 }
 
 export interface CategoryInterface{
@@ -66,6 +67,15 @@ export class PostService {
     });
   }
 
+  updateProfile( file: any, post_id: number ){
+    const updated_at = new Date();
+    const formData = new FormData();
+    formData.append('profile', file);
+    formData.append('updated_at', updated_at.toString());
+    formData.append('post_id', post_id.toString());
+    return this.http.post(`${Globals.URL}/api/posts/profile`, formData).toPromise();
+  }
+
   getCategories(){
     return this.http.get(`${Globals.URL}/api/posts/data/categories`);
   }
@@ -76,6 +86,11 @@ export class PostService {
     }, (error: any) => {
       console.log(error);
     });
+  }
+
+  saveAsEntry(entry_date: Date, post_id: number, show: boolean){
+
+    return this.http.put(`${Globals.URL}/api/posts/entry`, { entry_date, post_id, show }).toPromise();
   }
 
 }

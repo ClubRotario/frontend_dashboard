@@ -9,7 +9,7 @@
         <div class="col-lg-3 col-md-6 col-sm-12 mb-30 mt-4 animate__animated animate__fadeIn" *ngFor="let post of posts">
             <div class="da-card">
                 <div class="da-card-photo">
-                    <img src="https://images.unsplash.com/photo-1613407793897-36a29386934c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="">
+                    <img [src]="post?.profile | noimage" alt="">
                     <div class="da-overlay da-slide-left">
                         <div class="da-social">
                             <ul class="clearfix">

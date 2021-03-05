@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Globals } from 'src/app/services/globals';
 import { PostService, PostInterface } from '../../services/post.service';
 
 @Component({
@@ -27,6 +28,11 @@ export class PostsComponent implements OnInit {
     this.postService.getAllPosts( this.postId ).subscribe( (res: any) =>{
       this.posts = res.posts;
       this.pagination = res.pagination;
+      this.posts.map( (post: PostInterface) => {
+        if(post.profile){
+          post.profile = `${Globals.URL}/profiles/${post.profile}`;
+        }
+      });
     });
   }
 
