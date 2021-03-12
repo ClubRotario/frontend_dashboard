@@ -17,15 +17,20 @@ interface PostDetailsInterface{
     post_id: number,
     published: boolean,
     published_at: Date,
-    tag_id: number,
     title: string,
     updated_at: Date,
     user_id: number,
     profile: string,
     entry?: boolean,
-    entry_date?: Date
+    entry_date?: Date,
+    tags?: TagInterface[]
   },
   postId: number
+}
+
+interface TagInterface {
+  tag_id: number,
+  tag_content: string
 }
 
 @Component({
@@ -153,6 +158,34 @@ export class EditPostComponent implements OnInit {
       })
     }
   
+  }
+
+  deleteTag( tag_id: number ){
+    this.postService.removeTag( tag_id ).then( (res: any) => {
+      this.postDetails.post.tags = this.postDetails.post.tags.filter( (tag: TagInterface) => tag.tag_id != tag_id);
+    });
+  }
+
+  addTag( tag: any ){
+    const tag_content = tag.value;
+    if(!tag_content){
+      this.showAlert( 'Error al momento de agregar el Tag', 'Debe de especificar el contenido del tag antes de continuar', 'error' );
+    }else{
+      if(!this.postDetails.post.tags){
+        this.postDetails.post.tags = new Array<TagInterface>();
+      }
+      this.postService.addTag( tag_content, this.postDetails.postId ).then( (res: any) => {
+        const { tag_id } = res;
+        console.log(tag_id);
+        this.postDetails.post.tags.push({ tag_id, tag_content });
+      }).catch((error: any) => {
+        console.log(error);
+      }).finally( () => {
+        tag.value = '';
+      });
+      
+      
+    }
   }
 
 

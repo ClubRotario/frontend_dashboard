@@ -74,3 +74,11 @@
   .slider.round:before {
     border-radius: 50%;
   }
+
+  #description{
+    height: 100px;
+  }
+
+  .badge a:hover {
+    cursor: pointer;
+  }

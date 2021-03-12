@@ -12,7 +12,8 @@ export interface UserInterface {
   email: string,
   role: string,
   phone: string,
-  address: string
+  address: string,
+  isAdmin?: boolean
 }
 
 @Injectable({
@@ -22,7 +23,7 @@ export class AuthService {
 
   user: UserInterface;
 
-  _user = new BehaviorSubject<UserInterface>({ name: '', last_name: '', email: '', phone: '', userId: 0, address: '', role: '' });
+  _user = new BehaviorSubject<UserInterface>({ name: '', last_name: '', email: '', phone: '', userId: 0, address: '', role: '', isAdmin: false });
 
   constructor( private http: HttpClient, private router: Router ) { }
 

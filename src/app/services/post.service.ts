@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Globals } from '../services/globals';
 import { AuthService } from './auth.service';
 import { BehaviorSubject } from 'rxjs';
@@ -46,8 +46,11 @@ export class PostService {
     });
   };
 
-  getAllPosts(page = 1){
-    return this.http.get(`${Globals.URL}/api/posts/${page}`);
+  getAllPosts(page = 1, myPosts = false){
+    const headers = new HttpHeaders({
+      token: this.authService.getToken()
+    })
+    return this.http.get(`${Globals.URL}/api/posts/${page}${ myPosts ? '?owner=true': '' }`, { headers });
   }
 
   getPostById( post_id: number ){
@@ -91,6 +94,19 @@ export class PostService {
   saveAsEntry(entry_date: Date, post_id: number, show: boolean){
 
     return this.http.put(`${Globals.URL}/api/posts/entry`, { entry_date, post_id, show }).toPromise();
+  }
+
+  //Funciones para agregar o remover los tags
+  removeTag( tag_id: number ){
+    return this.http.delete( `${Globals.URL}/api/posts/tags/${tag_id}`, ).toPromise();
+  }
+
+  addTag( tag_content: string, post_id: number ){
+    return this.http.post( `${Globals.URL}/api/posts/add/tags`, { tag_content, post_id }).toPromise();
+  }
+
+  deletepost( post_id: number ){
+    return this.http.delete(`${Globals.URL}/api/posts/post?id=${post_id}`).toPromise();
   }
 
 }

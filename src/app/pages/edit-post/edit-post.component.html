@@ -28,6 +28,23 @@
                                 <textarea class="form-control" type="text" id="description" [(ngModel)]="postDetails.post.description" (change)="autoSave()"></textarea>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="tags">Tags</label><br>
+                                <small>Agrega palabras claves para describir tu post</small>
+                                <div class="form-group d-flex">
+                                    <input type="text" name="tags" class="form-control" #tag_content (keyup.enter)="addTag(tag_content)" autocomplete="off">
+                                    <button class="btn btn-primary my-auto mx-2" (click)="addTag(tag_content)">Agregar</button>
+                                </div>
+                            </div>
+                            <div class="col-12" *ngIf="postDetails.post.tags?.length > 0 || false">
+                                <div class="card w-100">
+                                    <div class="card-body">
+                                        <span class="badge badge-primary m-1" *ngFor="let tag of postDetails.post.tags">{{ tag.tag_content | uppercase }} <a (click)="deleteTag(tag.tag_id)" class="text-white">X</a></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
