@@ -1,6 +1,7 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Globals } from 'src/app/services/globals.js';
 import * as Editor from '../../../assets/editor/ckeditor.js';
 import { PostService } from '../../services/post.service';
 
@@ -66,7 +67,7 @@ export class EditorComponent implements OnInit, OnDestroy {
     // This value must be kept in sync with the language defined in webpack.config.js.
     language: 'es',
     simpleUpload: {
-      uploadUrl: 'http://localhost:3300/api/posts/images/upload',
+      uploadUrl: `https://rotary.omgweb.xyz/api/posts/images/upload`,
       withCredentials: false,
       headers: {
         postId: 0

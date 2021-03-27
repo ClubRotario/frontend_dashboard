@@ -1,150 +1,285 @@
 <div class="card-box mb-30">
-    <div class="pd-20 text-center">
-        <h4 class="text-dark h4">Listado de usuarios registrados.</h4>
-    </div>
-    <div class="pb-20">
-        <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-            <div class="row pb-20">
-                <div class="col-12 text-center my-4">
-                    <button class="btn btn-primary" data-target="#register-modal" data-toggle="modal">
-                        Registrar un nuevo usuario <i class="icon-copy dw dw-add-user mx-2"></i>
-                    </button>
-                </div>
-                <div class="col-sm-12 col-md-6 mx-auto">
-                    <div class="dataTables_filter">
-                        <label>Buscar:</label>
-                        <input type="search" class="form-control" placeholder="Escriba el nombre del usuario" [(ngModel)]="name" (keyup)="getUserByName()">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-md-8 col-mg-6 mx-auto animate__animated animate__fadeIn" *ngIf="users?.length === 0 || false">
-                    <app-alert type="warning" text="No hay usuarios registrados con ese nombre" ></app-alert>
-                </div>
-                <div class="col-sm-12">
-                    <table class="data-table table stripe hover nowrap dataTable no-footer dtr-inline" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
-                        <thead>
-                            <tr role="row">
-                                <th class="table-plus">Nombre</th>
-                                <th class="table-plus">Correo electrónico</th>
-                                <th class="table-plus">Teléfono</th>
-                                <th class="table-plus">Dirección</th>
-                                <th class="table-plus">Fecha de Registro</th>
-                                <th class="table-plus">Rol</th>
-                                <th class="table-plus">Opciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr role="row" class="odd" *ngFor="let user of users">
-
-                                <td class="table-plus">{{ user.fullName }}</td>
-                                <td>{{ user.email }}</td>
-                                <td>{{ user.phone }}</td>
-                                <td>{{ user.address }}</td>
-                                <td>{{ user.created_at | date: 'dd/MM/yyyy' }}</td>
-                                <td>{{ user.role }}</td>
-                                <td>
-                                    <div class="dropdown">
-                                        <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                            <i class="dw dw-more"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                            <button class="dropdown-item" (click)="deleteUser(user.user_id)">
-                                                <i class="dw dw-delete-3"></i> Eliminar
-                                            </button>
-                                        </div>
-                                    </div>
-                                </td>
-
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+  <div class="pd-20 text-center">
+    <h4 class="text-dark h4">Listado de usuarios registrados.</h4>
+  </div>
+  <div class="pb-20">
+    <div
+      id="DataTables_Table_0_wrapper"
+      class="dataTables_wrapper dt-bootstrap4 no-footer"
+    >
+      <div class="row pb-20">
+        <div class="col-12 text-center my-4">
+          <button
+            class="btn btn-primary"
+            data-target="#register-modal"
+            data-toggle="modal"
+          >
+            Registrar un nuevo usuario
+            <i class="icon-copy dw dw-add-user mx-2"></i>
+          </button>
         </div>
+        <div class="col-sm-12 col-md-6 mx-auto">
+          <div class="dataTables_filter">
+            <label>Buscar:</label>
+            <input
+              type="search"
+              class="form-control"
+              placeholder="Escriba el nombre del usuario"
+              [(ngModel)]="name"
+              (keyup)="getUserByName()"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div
+          class="col-12 col-md-8 col-mg-6 mx-auto animate__animated animate__fadeIn"
+          *ngIf="users?.length === 0 || false"
+        >
+          <app-alert
+            type="warning"
+            text="No hay usuarios registrados con ese nombre"
+          ></app-alert>
+        </div>
+        <div class="col-sm-12">
+          <table
+            class="data-table table stripe hover nowrap dataTable no-footer dtr-inline"
+            id="DataTables_Table_0"
+            role="grid"
+            aria-describedby="DataTables_Table_0_info"
+          >
+            <thead>
+              <tr role="row">
+                <th class="table-plus">Nombre</th>
+                <th class="table-plus">Correo electrónico</th>
+                <th class="table-plus">Teléfono</th>
+                <th class="table-plus">Dirección</th>
+                <th class="table-plus">Fecha de Registro</th>
+                <th class="table-plus">Rol</th>
+                <th class="table-plus">Opciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr role="row" class="odd" *ngFor="let user of users">
+                <td class="table-plus">{{ user.fullName }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.phone }}</td>
+                <td>{{ user.address }}</td>
+                <td>{{ user.created_at | date: "dd/MM/yyyy" }}</td>
+                <td>{{ user.role }}</td>
+                <td>
+                  <div class="dropdown">
+                    <a
+                      class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
+                      href="#"
+                      role="button"
+                      data-toggle="dropdown"
+                    >
+                      <i class="dw dw-more"></i>
+                    </a>
+                    <div
+                      class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
+                    >
+                      <button
+                        class="dropdown-item"
+                        (click)="deleteUser(user.user_id)"
+                      >
+                        <i class="dw dw-delete-3"></i> Eliminar
+                      </button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
-
+<app-pagination
+    [pages]="pagination"
+    url="users"
+    (changePage)="changePage($event)"
+    linked="none"
+></app-pagination>
 <!-- Modal para el registro de usuarios -->
-<div class="modal fade" id="register-modal" tabindex="-1" role="dialog" data-backdrop="static" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="mb-30">
-                <div class="card-box overflow-hidden h-100">
-                    <div class="card-header">
-                        <h3 class="text-primary">Registro de usuario</h3>
-                    </div>
-                    <div class="card-body form-content">
-                        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-                            <div class="form-group row">
-                                <div class="col-sm-12 col-md-6">
-                                    <label for="name">Nombre: </label>
-                                    <input class="form-control" type="text" id="name" formControlName="name" [class.is-invalid]="isValidName">
-                                    <small class="text-danger d-block" *ngIf="isValidName">El nombre es obligatorio para continuar.</small>
-                                </div>
-                                <div class="col-sm-12 col-md-6">
-                                    <label for="lastName">Apellidos: </label>
-                                    <input class="form-control" type="text" id="lastName" formControlName="lastName" [class.is-invalid]="isValidLastName">
-                                    <small class="text-danger d-block" *ngIf="isValidLastName">El apellido es obligatorio para continuar.</small>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-12 col-md-6">
-                                    <label for="email">Correo: </label>
-                                    <input class="form-control" type="text" id="email" formControlName="email" [class.is-invalid]="isValidEmail">
-                                    <small class="text-danger d-block" *ngIf="isValidEmail">El correo electrónico es obligatorio para continuar.</small>
-                                    <small class="text-danger d-block" *ngIf="isValidEmailPattern">El formato del correo electrónico no es correcto.</small>
-                                </div>
-                                <div class="col-sm-12 col-md-6">
-                                    <label for="phone">Teléfono: </label>
-                                    <input class="form-control" type="text" id="phone" formControlName="phone" [class.is-invalid]="isValidPhone" maxlength="8">
-                                    <small class="text-danger d-block" *ngIf="isValidPhone">El teléfono es obligatorio para continuar.</small>
-                                    <small class="text-danger d-block" *ngIf="isValidPhoneNumber">El teléfono solo puede contener valores numericos.</small>
-                                    <small class="text-danger d-block" *ngIf="isValidPhoneLength">El teléfono no puede contener mas de 8 numeros.</small>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-12 col-md-6">
-                                    <label for="passwrod">Contraseña: </label>
-                                    <input class="form-control" type="password" id="passwrod" formControlName="password" [class.is-invalid]="isValidPassword">
-                                    <small class="text-danger d-block" *ngIf="isValidPassword">La contraseña es obligatoria para continuar.</small>
-                                    <small class="text-danger d-block" *ngIf="isValidPasswordLength">La contraseña deve contener al menos 8 caracteres.</small>
-                                    <small class="text-danger d-block" *ngIf="formGroup.errors && formGroup.errors.notSame">Las contraseñas no coinciden.</small>
-                                </div>
-                                <div class="col-sm-12 col-md-6">
-                                    <label for="repeatPassword">Repetir contraseña: </label>
-                                    <input class="form-control" type="password" id="repeatPassword" formControlName="repeatPassword">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-12">
-                                    <label for="role">Rol: </label>
-                                    <select class="custom-select col-12" formControlName="role" (change)="onRoleChange()">
-                                        <option disabled value="0">Selecciona la Categoría</option>
-                                        <option value="1">Administrador</option>
-                                        <option value="2">Editor</option>
-                                    </select>
-                                    <small class="text-danger d-block" *ngIf="formGroup.get('role').touched && formGroup.errors && formGroup.errors.notRole">Es necesario especificar un rol para continuar</small>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-12">
-                                    <label for="address">Dirección: </label>
-                                    <textarea class="form-control" type="text" id="address" formControlName="address" [class.is-invalid]="isValidAddress"></textarea>
-                                    <small class="text-danger d-block" *ngIf="isValidAddress">La dirección es obligatoria para continuar.</small>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-12 text-right">
-                                    <button class="btn btn-primary mx-1" value="50" type="submit">Registrar <i class="icon-copy dw dw-diskette1 mx-1"></i></button>
-                                    <button class="btn btn-danger mx-1" value="50" type="button" #close data-dismiss="modal" (click)="onCloseModal()">Cancelar <i class="icon-copy dw dw-cancel mx-1"></i></button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+<div
+  class="modal fade"
+  id="register-modal"
+  tabindex="-1"
+  role="dialog"
+  data-backdrop="static"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="mb-30">
+        <div class="card-box overflow-hidden h-100">
+          <div class="card-header">
+            <h3 class="text-primary">Registro de usuario</h3>
+          </div>
+          <div class="card-body form-content">
+            <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+              <div class="form-group row">
+                <div class="col-sm-12 col-md-6">
+                  <label for="name">Nombre: </label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="name"
+                    formControlName="name"
+                    [class.is-invalid]="isValidName"
+                  />
+                  <small class="text-danger d-block" *ngIf="isValidName"
+                    >El nombre es obligatorio para continuar.</small
+                  >
                 </div>
-            </div>
+                <div class="col-sm-12 col-md-6">
+                  <label for="lastName">Apellidos: </label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="lastName"
+                    formControlName="lastName"
+                    [class.is-invalid]="isValidLastName"
+                  />
+                  <small class="text-danger d-block" *ngIf="isValidLastName"
+                    >El apellido es obligatorio para continuar.</small
+                  >
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-12 col-md-6">
+                  <label for="email">Correo: </label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="email"
+                    formControlName="email"
+                    [class.is-invalid]="isValidEmail"
+                  />
+                  <small class="text-danger d-block" *ngIf="isValidEmail"
+                    >El correo electrónico es obligatorio para continuar.</small
+                  >
+                  <small class="text-danger d-block" *ngIf="isValidEmailPattern"
+                    >El formato del correo electrónico no es correcto.</small
+                  >
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <label for="phone">Teléfono: </label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="phone"
+                    formControlName="phone"
+                    [class.is-invalid]="isValidPhone"
+                    maxlength="8"
+                  />
+                  <small class="text-danger d-block" *ngIf="isValidPhone"
+                    >El teléfono es obligatorio para continuar.</small
+                  >
+                  <small class="text-danger d-block" *ngIf="isValidPhoneNumber"
+                    >El teléfono solo puede contener valores numericos.</small
+                  >
+                  <small class="text-danger d-block" *ngIf="isValidPhoneLength"
+                    >El teléfono no puede contener mas de 8 numeros.</small
+                  >
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-12 col-md-6">
+                  <label for="passwrod">Contraseña: </label>
+                  <input
+                    class="form-control"
+                    type="password"
+                    id="passwrod"
+                    formControlName="password"
+                    [class.is-invalid]="isValidPassword"
+                  />
+                  <small class="text-danger d-block" *ngIf="isValidPassword"
+                    >La contraseña es obligatoria para continuar.</small
+                  >
+                  <small
+                    class="text-danger d-block"
+                    *ngIf="isValidPasswordLength"
+                    >La contraseña deve contener al menos 8 caracteres.</small
+                  >
+                  <small
+                    class="text-danger d-block"
+                    *ngIf="formGroup.errors && formGroup.errors.notSame"
+                    >Las contraseñas no coinciden.</small
+                  >
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <label for="repeatPassword">Repetir contraseña: </label>
+                  <input
+                    class="form-control"
+                    type="password"
+                    id="repeatPassword"
+                    formControlName="repeatPassword"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <label for="role">Rol: </label>
+                  <select
+                    class="custom-select col-12"
+                    formControlName="role"
+                    (change)="onRoleChange()"
+                  >
+                    <option disabled value="0">Selecciona la Categoría</option>
+                    <option value="1">Administrador</option>
+                    <option value="2">Editor</option>
+                  </select>
+                  <small
+                    class="text-danger d-block"
+                    *ngIf="
+                      formGroup.get('role').touched &&
+                      formGroup.errors &&
+                      formGroup.errors.notRole
+                    "
+                    >Es necesario especificar un rol para continuar</small
+                  >
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <label for="address">Dirección: </label>
+                  <textarea
+                    class="form-control"
+                    type="text"
+                    id="address"
+                    formControlName="address"
+                    [class.is-invalid]="isValidAddress"
+                  ></textarea>
+                  <small class="text-danger d-block" *ngIf="isValidAddress"
+                    >La dirección es obligatoria para continuar.</small
+                  >
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-12 text-right">
+                  <button class="btn btn-primary mx-1" value="50" type="submit">
+                    Registrar <i class="icon-copy dw dw-diskette1 mx-1"></i>
+                  </button>
+                  <button
+                    class="btn btn-danger mx-1"
+                    value="50"
+                    type="button"
+                    #close
+                    data-dismiss="modal"
+                    (click)="onCloseModal()"
+                  >
+                    Cancelar <i class="icon-copy dw dw-cancel mx-1"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
-

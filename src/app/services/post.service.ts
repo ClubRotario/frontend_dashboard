@@ -91,9 +91,9 @@ export class PostService {
     });
   }
 
-  saveAsEntry(entry_date: Date, post_id: number, show: boolean){
+  saveAsEntry(start: Date, end: Date, post_id: number, show: boolean, address: string){
 
-    return this.http.put(`${Globals.URL}/api/posts/entry`, { entry_date, post_id, show }).toPromise();
+    return this.http.put(`${Globals.URL}/api/posts/entry`, { start, end, post_id, show, address }).toPromise();
   }
 
   //Funciones para agregar o remover los tags

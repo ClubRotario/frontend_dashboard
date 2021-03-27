@@ -20,8 +20,8 @@ export class UsersService {
 
   constructor( private http: HttpClient ) { }
 
-  getManyUsers(){
-    return this.http.get(`${Globals.URL}/api/users`).toPromise();
+  getManyUsers( page:number = 1 ){
+    return this.http.get(`${Globals.URL}/api/users?page=${page}`).toPromise();
   }
 
   getUserByName( name: string ){

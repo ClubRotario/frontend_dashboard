@@ -14,20 +14,26 @@ export interface Pagination{
 export class PaginationComponent implements OnInit {
 
   @Input() pages: Pagination;
+  @Input() url = 'posts';
+  @Input() linked: string;
   @Output() changePage = new EventEmitter<number>();
 
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.pages);
+
   }
 
   getUrl( page: number ){
-    return `/dashboard/posts/${page}`;
+    return `/dashboard/${this.url}/${page}`;
   }
 
   pageChanged( page:number ){
     this.changePage.emit(page);
+  }
+
+  get showLink(){
+    return this.linked == "none" ? true: false
   }
 
 }

@@ -22,7 +22,9 @@ interface PostDetailsInterface{
     user_id: number,
     profile: string,
     entry?: boolean,
-    entry_date?: Date,
+    start?: Date,
+    end?: Date,
+    address?: string,
     tags?: TagInterface[]
   },
   postId: number
@@ -43,7 +45,10 @@ export class EditPostComponent implements OnInit {
   postId: number;
   postDetails: PostDetailsInterface;
 
-  calendar: string;
+  startDate: string;
+  endDate: string;
+
+  address: string;
 
   time:any;
 
@@ -65,7 +70,9 @@ export class EditPostComponent implements OnInit {
         this.postDetails.post.profile = `${Globals.URL}/profiles/${this.postDetails.post.profile}`;
       }
       if(this.postDetails.post.entry){
-        this.calendar = this.postDetails.post.entry_date.toString();
+        this.startDate = this.postDetails.post.start.toString();
+        this.endDate = this.postDetails.post.end.toString();
+        this.address = this.postDetails.post.address;
       }
     })
   }
@@ -87,7 +94,7 @@ export class EditPostComponent implements OnInit {
   }
 
   createEntry( entry: any ){
-    if( !this.calendar ){
+    if( !this.startDate ){
       Swal.fire({
         title: 'No se puede configurar la fecha',
         text: 'Por favor seleccione una fecha antes de agendar el post',
@@ -95,14 +102,21 @@ export class EditPostComponent implements OnInit {
         confirmButtonText: 'Aceptar'
       });
       entry.checked = false;
+    }else if( !this.address ){
+      this.showAlert('Error al momento de agendar', 'Por favor ingresa la dirección del evento para continuar', 'error');
+      entry.checked = false;
     }else{
-      const date = new Date(this.calendar);
-      this.postService.saveAsEntry(date, this.postDetails.postId, entry.checked).then( (res: any) => {
+      const date = new Date(this.startDate);
+      const endDate = this.endDate && this.endDate.length > 0 ? new Date(this.endDate) : date;
+      this.postService.saveAsEntry(date, endDate, this.postDetails.postId, entry.checked, this.address).then( (res: any) => {
         this.showAlert('Correcto', 'Agenda modifcada correctamente', 'success');
         if(!entry.checked){
-          this.calendar = '';
+          this.startDate = '';
+          this.endDate = '';
           this.postDetails.post.entry = false;
-          this.postDetails.post.entry_date = null;
+          this.postDetails.post.start = null;
+          this.postDetails.post.end = null;
+          this.postDetails.post.address = '';
         }
       }).catch( (error: any) => {
         console.log(error);
@@ -111,8 +125,12 @@ export class EditPostComponent implements OnInit {
     }
   }
 
-  setDate( event: any ){
-    this.calendar = event;
+  setStartDate( event: any ){
+    this.startDate = event;
+  }
+
+  setEndDate( event: any ){
+    this.endDate = event;
   }
 
   setPostContent( event: string ){

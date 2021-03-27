@@ -16,6 +16,7 @@ export class UsersComponent implements OnInit {
   users: UserInterface[];
   formGroup: FormGroup;
   name: string;
+  public pagination: any;
   constructor( private userService: UsersService, private formBuilder: FormBuilder, private validatorService: ValidatorsService ) { }
 
   ngOnInit(): void {
@@ -26,6 +27,7 @@ export class UsersComponent implements OnInit {
   getAllUsers(){
     this.userService.getManyUsers().then( (res: any) => {
       this.users = res.users;
+      this.pagination = res.pagination;
     }).catch( (error: any) => {
       console.log(error);
     })
@@ -45,6 +47,15 @@ export class UsersComponent implements OnInit {
     }else{
       this.getAllUsers();
     }
+  }
+
+  changePage( page: any ){
+    this.userService.getManyUsers( page ).then( (res: any) => {
+      this.users = res.users;
+      this.pagination = res.pagination;
+    }).catch( (error: any) => {
+      console.log(error);
+    });
   }
 
   //Funcion para cerrar el modal y reiniciar el formulario

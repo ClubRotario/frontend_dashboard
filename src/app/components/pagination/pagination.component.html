@@ -1,7 +1,27 @@
-<nav aria-label="..." *ngIf="pages?.show || false">
-    <ul class="pagination">
-        <li class="page-item" [class.active]="page == pages.currentPage" *ngFor="let page of  pages.totalPages">
-            <a class="page-link" [routerLink]="getUrl(page)" (click)="pageChanged(page)">{{ page }}</a>
-        </li>
-    </ul>
-</nav>
+<div class="row" *ngIf="pages?.show || false">
+  <div class="col-12">
+    <div class="card p-2 shadow border-0 mb-30">
+      <small class="my-2">Pagínas</small>
+      <nav>
+        <ul class="pagination">
+          <li
+            class="page-item"
+            [class.active]="page == pages.currentPage"
+            *ngFor="let page of pages.totalPages"
+          >
+            <a
+              class="page-link"
+              [routerLink]="getUrl(page)"
+              (click)="pageChanged(page)"
+              *ngIf="!showLink"
+              >{{ page }}</a
+            >
+            <a class="page-link" (click)="pageChanged(page)" *ngIf="showLink">{{
+              page
+            }}</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
