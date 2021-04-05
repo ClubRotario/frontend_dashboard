@@ -37,7 +37,7 @@
                     <p class="text-primary">Ajustes de la cuenta</p>
                 </div>
                 <div class="card-body form-content">
-                    <form [formGroup]="formGroup">
+                    <form [formGroup]="formGroup" (submit)="updateUserProfile()">
                         <div class="form-group row">
                             <div class="col-sm-12">
                                 <label for="name">Nombre: </label>

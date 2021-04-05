@@ -16,6 +16,33 @@ export interface UserInterface {
   isAdmin?: boolean
 }
 
+export interface Dashboard{
+  totalUsers: number,
+  totalPosts: number,
+  lastUsers: User[],
+  lastPosts: Post[]
+
+}
+
+interface User{
+  user_id: number,
+  name: string,
+  last_name: string,
+  email: string,
+  phone: string,
+  address: string,
+  created_at: Date
+}
+
+interface Post{
+  post_id: number,
+  title: string,
+  description: string,
+  published_at: Date,
+  category: string,
+  profile: string
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -25,7 +52,15 @@ export class AuthService {
 
   _user = new BehaviorSubject<UserInterface>({ name: '', last_name: '', email: '', phone: '', userId: 0, address: '', role: '', isAdmin: false });
 
-  constructor( private http: HttpClient, private router: Router ) { }
+  private _dashboard: Dashboard;
+
+  get dashboard(): Dashboard{
+    return this._dashboard;
+  }
+
+  constructor( private http: HttpClient, private router: Router ) {
+    this.getDashboard();
+  }
 
   login( user ){
     return this.http.post(`${Globals.URL}/api/auth/login`, user);
@@ -41,6 +76,13 @@ export class AuthService {
       }, (error: any) => {
         console.log(error);
       })
+  }
+
+  updateUserProfile(user: UserInterface){
+    const headers = new HttpHeaders({
+      token: this.getToken()
+    })
+    return this.http.put(`${Globals.URL}/api/auth/profile`, user, { headers }).toPromise();
   }
 
   logOut(){
@@ -91,5 +133,14 @@ export class AuthService {
       token: this.getToken()
     });
     return this.http.get(`${Globals.URL}/api/auth/is-logged`, { headers });
+  }
+
+  getDashboard(){
+    const headers = new HttpHeaders({
+      token: this.getToken()
+    });
+    this.http.get<Dashboard>(`${Globals.URL}/api/auth/dashboard`, { headers }).subscribe( res => {
+      this._dashboard = res;
+    });
   }
 }

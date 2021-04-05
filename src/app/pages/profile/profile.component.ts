@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService, UserInterface } from '../../services/auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-profile',
@@ -37,6 +38,16 @@ export class ProfileComponent implements OnInit {
       this.userDetails = res;
       this.initForms();
     });
+  }
+
+  updateUserProfile(){
+    if(this.formGroup.valid){
+      const user: UserInterface = this.formGroup.value;
+      this.authService.updateUserProfile( user ).then( (res:any) => {
+          this.authService.getUserDetails();
+          Swal.fire('Correcto', 'Datos actualizados correctamente', 'success');
+      })
+    }
   }
 
 }

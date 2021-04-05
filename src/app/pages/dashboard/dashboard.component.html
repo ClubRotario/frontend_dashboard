@@ -1,1 +1,61 @@
-
+<div class="row pb-10">
+    <div class="col-12 col-md-6">
+        <div class="row">
+            <div class="col-12 mb-30">
+                <div class="card-box height-100-p widget-style3">
+                    <div class="d-flex flex-wrap">
+                        <div class="widget-data">
+                            <div class="weight-700 font-24 text-dark">{{ dashboard.totalUsers }}</div>
+                            <div class="font-14 text-secondary weight-500">Usuarios registrados</div>
+                        </div>
+                        <div class="widget-icon">
+                            <div class="icon" data-color="#00eccf" style="color: rgb(0, 236, 207);"><i class="dw dw-user-1"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <p class="text-muted">Últimos usuarios regístrados</p>
+            </div>
+            <div class="col-12 mb-10" *ngFor="let user of dashboard.lastUsers">
+                <div class="card card-box border-0">
+                    <div class="card-body">
+                        <h5 class="card-title weight-500">{{ user.name }} {{ user.last_name }}</h5>
+                        <p class="card-text"><span class="font-weight-bold">Teléfono:</span> {{ user.phone }} - <span class="font-weight-bold">Direccón:</span> {{ user.address }}</p>
+                        <p class="card-text"><small class="text-muted">Fecha de regístro: {{ user.created_at | date:'dd/MM/yyyy' }}</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-6">
+        <div class="row">
+            <div class="col-12 mb-30">
+                <div class="card-box height-100-p widget-style3">
+                    <div class="d-flex flex-wrap">
+                        <div class="widget-data">
+                            <div class="weight-700 font-24 text-dark">{{ dashboard.totalPosts }}</div>
+                            <div class="font-14 text-secondary weight-500">Posts publicados</div>
+                        </div>
+                        <div class="widget-icon">
+                            <div class="icon" data-color="#ff5b5b" style="color: rgb(255, 91, 91);"><span class="dw dw-newspaper-1"></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <p class="text-muted">Últimos posts creados</p>
+            </div>
+            <div class="col-12 mb-30">
+                <div class="card card-box border-0 mb-10" *ngFor="let post of dashboard.lastPosts">
+                    <img class="card-img-top" [src]="getPostProfile( post.profile ) | noimage" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title weight-500">{{ post.title }}</h5>
+                        <p class="card-text">{{ post.description }}</p>
+                        <p class="card-text"><small class="text-muted">Fecha de publicación: {{ post.published_at | date:'dd/MM/yyyy' }}</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

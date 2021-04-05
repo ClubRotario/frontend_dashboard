@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Globals } from 'src/app/services/globals';
+import { AuthService, Dashboard } from '../../services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  get dashboard(): Dashboard{
+    return this.authService.dashboard;
+  }
+
+  constructor( private authService: AuthService ) { }
 
   ngOnInit(): void {
+  }
+
+  getPostProfile( name: string ): string{
+    return `${Globals.URL}/profiles/${name}`;
   }
 
 }

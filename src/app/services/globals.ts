@@ -1,3 +1,3 @@
 export class Globals {
-    static URL = 'https://rotary.omgweb.xyz'
+    static URL = 'http://localhost:3300'
 }

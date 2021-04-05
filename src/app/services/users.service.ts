@@ -32,4 +32,8 @@ export class UsersService {
     return this.http.post(`${Globals.URL}/api/users`, user ).toPromise();
   }
 
+  deleteUser( id:number ){
+    return this.http.delete(`${Globals.URL}/api/users/${id}`).toPromise();
+  }
+
 }

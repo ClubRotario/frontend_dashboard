@@ -34,7 +34,27 @@ export class UsersComponent implements OnInit {
   }
 
   deleteUser( id: number ){
-    
+    Swal.fire({
+      title: '¿Seguro que deseas eliminar este usuario?',
+      text: "Ten en cuenta que no podra acceder mas al sistema, este cambio es irreversible.",
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.userService.deleteUser( id ).then( (res: any) => {
+          this.getAllUsers();
+          Swal.fire(
+            'Correcto!',
+            'Usuario eliminado satisfactoriamente.',
+            'success'
+          )
+        })
+      }
+    })
   }
 
   getUserByName(){

@@ -1,1 +1,33 @@
-<p>categories works!</p>
+<div class="row p-2">
+    <div class="col-12 text-center">
+        <div class="card border-0 shadow my-2">
+            <div class="card-body">
+                <p>Agrega una nueva categoria para seleccionarla desde la opciones del post.</p>
+                <button class="btn btn-primary text-capitalize" (click)="onCreateCategory()">Agregar nueva categoria</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="card border-0 shadow">
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Nombre de la Cátegoria</th>
+                        <th scope="col">Opciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let category of categories">
+                        <td>{{ category.category }}</td>
+                        <td><div>
+                            <button class="btn btn-warning mx-1" (click)="onUpdate( category.category_id, category.category )">Actualizar</button>
+                            <button class="btn btn-danger mx-1" (click)="onDelete( category.category_id )">Eliminar</button>
+                        </div></td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
