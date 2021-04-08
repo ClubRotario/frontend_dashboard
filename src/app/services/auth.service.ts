@@ -143,4 +143,12 @@ export class AuthService {
       this._dashboard = res;
     });
   }
+
+  changePassowrd( password:any ){
+    const headers = new HttpHeaders({
+      token: this.getToken()
+    });
+    console.log(password);
+    return this.http.put<any>(`${Globals.URL}/api/auth/password/change`, password, { headers }).toPromise();
+  }
 }

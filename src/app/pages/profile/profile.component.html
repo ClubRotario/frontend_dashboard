@@ -26,7 +26,7 @@
                         </li>
                     </ul>
                 </div>
-                <button class="btn btn-warning btn-block mt-4">Cambiar mi Contraseña <i class="icon-copy dw dw-password ml-2"></i></button>
+                <button class="btn btn-warning btn-block mt-4" data-toggle="modal" data-target="#exampleModal">Cambiar mi Contraseña <i class="icon-copy dw dw-password ml-2"></i></button>
             </div>
         </div>
     
@@ -77,5 +77,38 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-primary" id="exampleModalLabel">Cambio de contraseña</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="fgPassowrd" (submit)="onSubmitChangePassword()">
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Ingrese su antigua contraseña" [formControlName]="'oldPassword'">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Ingrese su nueva contraseña" [formControlName]="'newPassword'">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Repita su contraseña" [formControlName]="'repeatPassword'">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">Cambiar</button>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onCloseModal()">Cerrar</button>
+        </div>
+      </div>
     </div>
 </div>

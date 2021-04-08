@@ -15,12 +15,19 @@ export class ProfileComponent implements OnInit {
 
   formGroup: FormGroup;
 
+  fgPassowrd: FormGroup;
+
   userSub: Subscription;
 
   constructor( private authService: AuthService, private formBuilder: FormBuilder ) { }
 
   ngOnInit(): void {
     this.getUserDetails();
+    this.fgPassowrd = this.formBuilder.group({
+      oldPassword: ['', Validators.required],
+      newPassword: ['', Validators.required],
+      repeatPassword: ['', Validators.required]
+    });
   }
 
   initForms(){
@@ -49,5 +56,25 @@ export class ProfileComponent implements OnInit {
       })
     }
   }
+
+  onSubmitChangePassword(){
+    if(this.fgPassowrd.valid){
+      const password = {
+        newPassword: this.fgPassowrd.get('newPassword').value,
+        oldPassword: this.fgPassowrd.get('oldPassword').value
+      }
+      console.log(this.fgPassowrd.get('newPassword').value);
+      this.authService.changePassowrd( password ).then( res => {
+        Swal.fire('Correcto', 'Contraseña cambiada satisfactoriamente', 'success');
+      }).catch( err => {
+        Swal.fire('Error', 'Por favor, asegurese de que su contraseña actual es correcta', 'error');
+      })
+    }
+  }
+
+  onCloseModal(){
+    this.fgPassowrd.reset();
+  }
+
 
 }
