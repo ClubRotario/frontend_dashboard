@@ -19,7 +19,7 @@
                     </thead>
                     <tbody>
                       <tr *ngFor="let category of categories">
-                        <td>{{ category.category }}</td>
+                        <td>{{ category.category | titlecase }}</td>
                         <td><div>
                             <button class="btn btn-warning mx-1" (click)="onUpdate( category.category_id, category.category )">Actualizar</button>
                             <button class="btn btn-danger mx-1" (click)="onDelete( category.category_id )">Eliminar</button>
