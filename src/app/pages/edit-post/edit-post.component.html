@@ -87,11 +87,11 @@
                     <div class="card-body p-4">
                         <div class="w-100">
                             <p>Fecha de inicio:</p>
-                            <app-calendar (selectedDate)="setStartDate($event)" [date]="postDetails?.post.start" ></app-calendar>
+                            <app-calendar (selectedDate)="setStartDate($event)" [date]="postDetails?.post.start | date" ></app-calendar>
                         </div>
                         <div class="w-100">
                             <p>Fecha de finalización:</p>
-                            <app-calendar (selectedDate)="setEndDate($event)" [date]="postDetails?.post.end" ></app-calendar>
+                            <app-calendar (selectedDate)="setEndDate($event)" [date]="postDetails?.post.end |  date" ></app-calendar>
                         </div>
                     </div>
                 </div>

@@ -35,7 +35,7 @@ export class ProfileComponent implements OnInit {
       name: [this.userDetails.name, Validators.required],
       last_name: [this.userDetails.last_name, Validators.required],
       email: [this.userDetails.email, Validators.required],
-      phone: [this.userDetails.phone, Validators.required],
+      phone: [this.userDetails.phone, [Validators.required]],
       address: [this.userDetails.address, Validators.required]
     });
   }
@@ -48,12 +48,14 @@ export class ProfileComponent implements OnInit {
   }
 
   updateUserProfile(){
-    if(this.formGroup.valid){
+    if(this.formGroup.valid && !this.isValidEmailPatter && !this.isValidPhoneNumber){
       const user: UserInterface = this.formGroup.value;
       this.authService.updateUserProfile( user ).then( (res:any) => {
           this.authService.getUserDetails();
           Swal.fire('Correcto', 'Datos actualizados correctamente', 'success');
       })
+    }else{
+      Swal.fire('Error', 'Por favor corrige todos los errores para continuar', 'error');
     }
   }
 
@@ -74,6 +76,35 @@ export class ProfileComponent implements OnInit {
 
   onCloseModal(){
     this.fgPassowrd.reset();
+  }
+
+  get isValidName(){
+    return this.formGroup.get('name').errors && this.formGroup.get('name').touched && this.formGroup.get('name').invalid;
+  }
+
+  get isValidLastname(){
+    return this.formGroup.get('last_name').errors && this.formGroup.get('last_name').touched && this.formGroup.get('last_name').invalid;
+  }
+
+  get isValidEmail(){
+    return this.formGroup.get('email').errors && this.formGroup.get('email').touched && this.formGroup.get('email').invalid;
+  }
+
+  get isValidEmailPatter(){
+    const pattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+    return this.formGroup.get('email').touched && !pattern.exec( this.formGroup.get('email').value );
+  }
+
+  get isValidPhone(){
+    return this.formGroup.get('phone').errors && this.formGroup.get('phone').touched && this.formGroup.get('phone').invalid;
+  }
+
+  get isValidPhoneNumber(){
+    return this.formGroup.get('phone').touched && isNaN( this.formGroup.get('phone').value );
+  }
+
+  get isValidAddress(){
+    return this.formGroup.get('address').errors && this.formGroup.get('address').touched && this.formGroup.get('address').invalid;
   }
 
 

@@ -19,7 +19,11 @@ export class DashboardComponent implements OnInit {
   }
 
   getPostProfile( name: string ): string{
-    return `${Globals.URL}/profiles/${name}`;
+    if(name){
+      return `${Globals.URL}/profiles/${name}`;
+    }else{
+      return null;
+    }
   }
 
 }

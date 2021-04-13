@@ -41,36 +41,43 @@
                         <div class="form-group row">
                             <div class="col-sm-12">
                                 <label for="name">Nombre: </label>
+                                <small class="text-danger d-block" *ngIf="isValidName">El nombre es obligatorio</small>
                                 <input class="form-control" type="text" id="name" [formControlName]="'name'">
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12">
                                 <label for="lastName">Apellidos: </label>
+                                <small class="text-danger d-block" *ngIf="isValidLastname">Los apellidos son obligatorios</small>
                                 <input class="form-control" type="text" id="lastName" [formControlName]="'last_name'" >
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12">
                                 <label for="email">Correo: </label>
+                                <small class="text-danger d-block" *ngIf="isValidEmail">El correo electronico es obligatorio</small>
+                                <small class="text-danger d-block" *ngIf="isValidEmailPatter">El formato de correo electronico no es valido</small>
                                 <input class="form-control" type="text" id="email" [formControlName]="'email'" >
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12">
                                 <label for="phone">Celular: </label>
+                                <small class="text-danger d-block" *ngIf="isValidPhone">El telefono/celular es obligatorio</small>
+                                <small class="text-danger d-block" *ngIf="isValidPhoneNumber">Este campo solo debe contener valores numericos</small>
                                 <input class="form-control" type="text" id="phone" [formControlName]="'phone'" >
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12">
                                 <label for="address">Dirección: </label>
+                                <small class="text-danger d-block" *ngIf="isValidAddress">La dirección es obligatoria</small>
                                 <textarea class="form-control" type="text" id="address" [formControlName]="'address'" ></textarea>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12 text-right">
-                                <button class="btn btn-primary" value="50" type="submit">Guardar <i class="icon-copy dw dw-diskette1 ml-2"></i></button>
+                                <button class="btn btn-primary" value="50" type="submit" [disabled]="formGroup.invalid">Guardar <i class="icon-copy dw dw-diskette1 ml-2"></i></button>
                             </div>
                         </div>
                     </form>
