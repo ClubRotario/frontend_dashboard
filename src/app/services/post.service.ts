@@ -47,10 +47,7 @@ export class PostService {
   };
 
   getAllPosts(page = 1, myPosts = false){
-    const headers = new HttpHeaders({
-      token: this.authService.getToken()
-    })
-    return this.http.get(`${Globals.URL}/api/posts/${page}${ myPosts ? '?owner=true': '' }`, { headers });
+    return this.http.get(`${Globals.URL}/api/posts/${page}${ myPosts ? '?owner=true': '' }`);
   }
 
   getPostById( post_id: number ){
@@ -94,6 +91,14 @@ export class PostService {
   saveAsEntry(start: Date, end: Date, post_id: number, show: boolean, address: string){
 
     return this.http.put(`${Globals.URL}/api/posts/entry`, { start, end, post_id, show, address }).toPromise();
+  }
+
+  updateEntry( date: Date, post_id: number, type: string ){
+    return this.http.put(`${Globals.URL}/api/posts/entryDate`, { date, post_id, type });
+  }
+
+  updateEntryAddress( address: string, post_id: number ){
+    return this.http.put(`${Globals.URL}/api/posts/entryAddress`, { address, post_id });
   }
 
   //Funciones para agregar o remover los tags

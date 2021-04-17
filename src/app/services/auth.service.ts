@@ -1,7 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Route } from '@angular/compiler/src/core';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Globals } from './globals';
 import { Router } from '@angular/router';
 
@@ -46,7 +46,7 @@ interface Post{
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService implements HttpInterceptor {
 
   user: UserInterface;
 
@@ -62,15 +62,25 @@ export class AuthService {
     this.getDashboard();
   }
 
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const token = this.getToken();
+    let request = req;
+    if(token){
+      request = req.clone({
+        setHeaders: {
+          token
+        }
+      })
+    }
+    return next.handle(request);
+  }
+
   login( user ){
     return this.http.post(`${Globals.URL}/api/auth/login`, user);
   }
 
   getUserDetails(){
-      const headers = new HttpHeaders({
-        token: this.getToken()
-      })
-      this.http.get(`${Globals.URL}/api/auth/details`, { headers }).subscribe( (res: any) => {
+      this.http.get(`${Globals.URL}/api/auth/details`).subscribe( (res: any) => {
         this.user = res.userDetails;
         this._user.next( this.user );
       }, (error: any) => {
@@ -79,10 +89,7 @@ export class AuthService {
   }
 
   updateUserProfile(user: UserInterface){
-    const headers = new HttpHeaders({
-      token: this.getToken()
-    })
-    return this.http.put(`${Globals.URL}/api/auth/profile`, user, { headers }).toPromise();
+    return this.http.put(`${Globals.URL}/api/auth/profile`, user).toPromise();
   }
 
   logOut(){
@@ -129,26 +136,16 @@ export class AuthService {
   }
 
   isLoggedIn(){
-    const headers = new HttpHeaders({
-      token: this.getToken()
-    });
-    return this.http.get(`${Globals.URL}/api/auth/is-logged`, { headers });
+    return this.http.get(`${Globals.URL}/api/auth/is-logged`);
   }
 
   getDashboard(){
-    const headers = new HttpHeaders({
-      token: this.getToken()
-    });
-    this.http.get<Dashboard>(`${Globals.URL}/api/auth/dashboard`, { headers }).subscribe( res => {
+    this.http.get<Dashboard>(`${Globals.URL}/api/auth/dashboard`,).subscribe( res => {
       this._dashboard = res;
     });
   }
 
   changePassowrd( password:any ){
-    const headers = new HttpHeaders({
-      token: this.getToken()
-    });
-    console.log(password);
-    return this.http.put<any>(`${Globals.URL}/api/auth/password/change`, password, { headers }).toPromise();
+    return this.http.put<any>(`${Globals.URL}/api/auth/password/change`, password,).toPromise();
   }
 }

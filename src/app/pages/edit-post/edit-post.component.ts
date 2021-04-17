@@ -51,6 +51,7 @@ export class EditPostComponent implements OnInit {
   address: string;
 
   time:any;
+  time2:any;
 
   constructor( private postService: PostService, private activatedRoute: ActivatedRoute ) { }
 
@@ -117,6 +118,8 @@ export class EditPostComponent implements OnInit {
           this.postDetails.post.start = null;
           this.postDetails.post.end = null;
           this.postDetails.post.address = '';
+        }else{
+          this.postDetails.post.entry = true;
         }
       }).catch( (error: any) => {
         console.log(error);
@@ -127,10 +130,23 @@ export class EditPostComponent implements OnInit {
 
   setStartDate( event: any ){
     this.startDate = event;
+    if(this.postDetails.post.entry){
+      this.postService.updateEntry( new Date(event), this.postDetails.postId, 'start' ).subscribe();
+    }
   }
 
   setEndDate( event: any ){
     this.endDate = event;
+    if(this.postDetails.post.entry){
+      this.postService.updateEntry( new Date(event), this.postDetails.postId, 'end' ).subscribe();
+    }
+  }
+
+  onChangeAddress(){
+    clearTimeout(this.time2);
+    this.time2 = setTimeout(() => {
+      this.postService.updateEntryAddress( this.address, this.postDetails.post.post_id ).subscribe();
+    }, 2500);
   }
 
   setPostContent( event: string ){

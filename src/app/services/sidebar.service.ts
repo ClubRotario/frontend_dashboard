@@ -11,9 +11,6 @@ export class SidebarService {
   constructor( private http: HttpClient, private authService: AuthService ) { }
 
   getSidebar(){
-    const headers = new HttpHeaders({
-      token: this.authService.getToken()
-    })
-    return this.http.get(`${Globals.URL}/api/auth/sidebar`, { headers }).toPromise();
+    return this.http.get(`${Globals.URL}/api/auth/sidebar`).toPromise();
   }
 }
