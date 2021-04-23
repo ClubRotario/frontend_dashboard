@@ -82,13 +82,13 @@ export class EditPostComponent implements OnInit {
   publishPost( published: any ){
     if(!this.postDetails.post.description){
       published.checked = false;
-      this.showAlert( 'Error al momento de publicar', 'Por favor complete la descripcion de post para poder publicarlo.', 'error' );
+      this.showAlert( 'Error al momento de publicar', 'Por favor complete la descripción de post para poder publicarlo.', 'error' );
     }else if( !this.postDetails.post.content ){
       published.checked = false;
       this.showAlert( 'Error al momento de publicar', 'Agrega contenido a tu post antes de hacerlo visible.', 'error' );
     }else if(!this.postDetails.post.category_id){
       published.checked = false;
-      this.showAlert( 'Error al momento de publicar', 'Selecciona una categoria antes de publicar el post.', 'error' );
+      this.showAlert( 'Error al momento de publicar', 'Selecciona una categoría antes de publicar el post.', 'error' );
     }else{
       this.postService.publishPost( this.postDetails.postId, this.postDetails.post.published );
     }
@@ -110,7 +110,7 @@ export class EditPostComponent implements OnInit {
       const date = new Date(this.startDate);
       const endDate = this.endDate && this.endDate.length > 0 ? new Date(this.endDate) : date;
       this.postService.saveAsEntry(date, endDate, this.postDetails.postId, entry.checked, this.address).then( (res: any) => {
-        this.showAlert('Correcto', 'Agenda modifcada correctamente', 'success');
+        this.showAlert('Correcto', 'Agenda modificada correctamente', 'success');
         if(!entry.checked){
           this.startDate = '';
           this.endDate = '';

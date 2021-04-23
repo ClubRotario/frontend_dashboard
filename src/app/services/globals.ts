@@ -1,3 +1,3 @@
 export class Globals {
-    static URL = 'http://localhost:3300'
+    static URL = 'https://lapazrotaryclub.org'
 }

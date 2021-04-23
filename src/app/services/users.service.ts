@@ -6,11 +6,12 @@ export interface UserInterface {
   user_id: number,
   fullName: string,
   email: string,
-  phone: string,
+  phone: string, 
   address: string,
   created_at: Date,
   last_login: Date,
-  role: string
+  role: string,
+  charge?: string
 }
 
 @Injectable({

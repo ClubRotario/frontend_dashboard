@@ -92,6 +92,7 @@ export class UsersComponent implements OnInit {
       phone: ['', [Validators.required, Validators.maxLength(8)]],
       address: ['', [Validators.required]],
       role: [0],
+      charge: ['', [Validators.required]],
       email: ['', [Validators.required , Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       repeatPassword: ['', [Validators.required]]
@@ -102,7 +103,6 @@ export class UsersComponent implements OnInit {
     if(this.formGroup.valid){
       const user = this.formGroup.value;
       delete user.repeatPassword;
-      console.log(user);
       this.userService.saveOneUser( user ).then( (res: any) => {
         const { message } = res;
         this.showAlert('Correcta', message, 'success');
@@ -149,6 +149,11 @@ export class UsersComponent implements OnInit {
   get isValidPhone(){
     return this.formGroup.get('phone').touched && this.formGroup.get('phone').errors && this.formGroup.get('phone').errors.required;
   }
+
+  get isValidCharge(){
+    return this.formGroup.get('charge').touched && this.formGroup.get('charge').errors && this.formGroup.get('charge').errors.required;
+  }
+
   get isValidPassword(){
     return this.formGroup.get('password').touched && this.formGroup.get('password').errors && this.formGroup.get('password').errors.required;
   }
@@ -166,6 +171,7 @@ export class UsersComponent implements OnInit {
   get isValidPhoneLength(){
     return this.formGroup.get('phone').touched && this.formGroup.get('phone').errors && this.formGroup.get('phone').errors.maxlength;
   }
+  
 
 
 }

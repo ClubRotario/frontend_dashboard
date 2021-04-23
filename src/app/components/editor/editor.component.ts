@@ -67,10 +67,10 @@ export class EditorComponent implements OnInit, OnDestroy {
     // This value must be kept in sync with the language defined in webpack.config.js.
     language: 'es',
     simpleUpload: {
-      uploadUrl: `http://localhost:3300/api/posts/images/upload`,
+      uploadUrl: `https://lapazrotaryclub.org/api/posts/images/upload`,
       withCredentials: false,
       headers: {
-        postId: 0
+        postId: 0,
       }
   },
   };  

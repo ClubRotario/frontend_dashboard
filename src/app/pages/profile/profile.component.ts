@@ -16,7 +16,7 @@ export class ProfileComponent implements OnInit {
   formGroup: FormGroup;
 
   fgPassowrd: FormGroup;
-
+ 
   userSub: Subscription;
 
   constructor( private authService: AuthService, private formBuilder: FormBuilder ) { }
@@ -36,6 +36,7 @@ export class ProfileComponent implements OnInit {
       last_name: [this.userDetails.last_name, Validators.required],
       email: [this.userDetails.email, Validators.required],
       phone: [this.userDetails.phone, [Validators.required]],
+      charge: [this.userDetails.charge , [Validators.required]],
       address: [this.userDetails.address, Validators.required]
     });
   }
@@ -69,7 +70,7 @@ export class ProfileComponent implements OnInit {
       this.authService.changePassowrd( password ).then( res => {
         Swal.fire('Correcto', 'Contraseña cambiada satisfactoriamente', 'success');
       }).catch( err => {
-        Swal.fire('Error', 'Por favor, asegurese de que su contraseña actual es correcta', 'error');
+        Swal.fire('Error', 'Por favor, asegúrese de que su contraseña actual es correcta', 'error');
       })
     }
   }
@@ -105,6 +106,10 @@ export class ProfileComponent implements OnInit {
 
   get isValidAddress(){
     return this.formGroup.get('address').errors && this.formGroup.get('address').touched && this.formGroup.get('address').invalid;
+  }
+
+  get isValidCharge(){
+    return this.formGroup.get('charge').errors && this.formGroup.get('charge').touched && this.formGroup.get('charge').invalid;
   }
 
 

@@ -7,7 +7,7 @@
             <div class="col-12">
                 <select class="custom-select col-12" (change)="onChangeCategory()" [(ngModel)]="selected">
                     <option disabled value="0">Selecciona la Categoría</option>
-                    <option *ngFor="let category of categories" [value]="category.category_id">{{category.category}}</option>
+                    <option *ngFor="let category of categories" [value]="category.category_id">{{category.category | titlecase}}</option>
                 </select>
             </div>
         </div>

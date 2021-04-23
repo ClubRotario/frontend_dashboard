@@ -21,8 +21,8 @@ export class CategoriesComponent implements OnInit {
 
   onDelete( category_id: number ){
     Swal.fire({
-      title: '¿Estas seguro que deseas eliminar esta categoría?',
-      text: "Una vez realizada esta acción no se podra deshacer.",
+      title: '¿Estás seguro de que deseas eliminar esta categoría?',
+      text: "Una vez realizada esta acción no se podrá deshacer.",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -33,7 +33,7 @@ export class CategoriesComponent implements OnInit {
       if (result.isConfirmed) {
         this.categoriesService.deleteCategory( category_id ).subscribe( res => {
           this.categoriesService.getAllCategories();
-          Swal.fire('Carrecto', 'Categoría eliminada satisfactoriamente', 'success');
+          Swal.fire('Correcto', 'Categoría eliminada satisfactoriamente', 'success');
         }, err => {
           const message = err.error.message;
           Swal.fire('Error', message, 'error');

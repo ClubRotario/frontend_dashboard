@@ -13,7 +13,8 @@ export interface UserInterface {
   role: string,
   phone: string,
   address: string,
-  isAdmin?: boolean
+  isAdmin?: boolean,
+  charge?: string
 }
 
 export interface Dashboard{
@@ -31,7 +32,7 @@ interface User{
   email: string,
   phone: string,
   address: string,
-  created_at: Date
+  created_at: Date,
 }
 
 interface Post{

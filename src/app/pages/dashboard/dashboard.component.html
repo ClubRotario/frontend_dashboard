@@ -15,14 +15,14 @@
                 </div>
             </div>
             <div class="col-12">
-                <p class="text-muted">Últimos usuarios regístrados</p>
+                <p class="text-muted">Últimos usuarios registrados</p>
             </div>
             <div class="col-12 mb-10" *ngFor="let user of dashboard.lastUsers">
                 <div class="card card-box border-0">
                     <div class="card-body">
                         <h5 class="card-title weight-500">{{ user.name }} {{ user.last_name }}</h5>
-                        <p class="card-text"><span class="font-weight-bold">Teléfono:</span> {{ user.phone }} - <span class="font-weight-bold">Direccón:</span> {{ user.address }}</p>
-                        <p class="card-text"><small class="text-muted">Fecha de regístro: {{ user.created_at | date:'dd/MM/yyyy' }}</small></p>
+                        <p class="card-text"><span class="font-weight-bold">Teléfono:</span> {{ user.phone }} - <span class="font-weight-bold">Dirección:</span> {{ user.address }}</p>
+                        <p class="card-text"><small class="text-muted">Fecha de registro: {{ user.created_at | date:'dd/MM/yyyy' }}</small></p>
                     </div>
                 </div>
             </div>
